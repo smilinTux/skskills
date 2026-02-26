@@ -1,0 +1,27 @@
+name: skcapstone-agent
+version: 0.1.0
+description: >
+  Sovereign agent runtime: identity, memory, trust, security, and sync.
+  Use skcapstone from this project — CLI on PATH, rehydrate on startup,
+  context in every tool (Claude Code, Cursor, VS Code, Windsurf).
+author:
+  name: smilinTux
+  email: admin@smilintux.org
+
+knowledge:
+  - path: knowledge/SKILL.md
+    description: Full skcapstone usage, rehydration, and tool integration
+    auto_load: true
+
+dependencies: []
+
+tags:
+  - sovereign
+  - agent
+  - skcapstone
+  - identity
+  - memory
+  - trust
+  - sync
+
+python_requires: ">=3.10"

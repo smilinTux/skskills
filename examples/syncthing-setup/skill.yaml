@@ -1,0 +1,96 @@
+name: syncthing-setup
+version: 0.1.0
+description: >
+  Install, configure, and manage Syncthing for sovereign peer-to-peer file sync.
+  Covers initial setup, device pairing, folder sharing, and service management.
+author:
+  name: smilinTux
+  email: admin@smilintux.org
+
+knowledge:
+  - path: knowledge/SKILL.md
+    description: Full Syncthing setup guide and architecture overview
+    auto_load: true
+  - path: knowledge/troubleshooting.md
+    description: Common Syncthing issues and fixes
+    auto_load: false
+
+tools:
+  - name: check_status
+    description: Check Syncthing daemon status (running/stopped, version, device ID)
+    entrypoint: tools/syncthing_tools.py:check_status
+    input_schema:
+      type: object
+      properties:
+        config_dir:
+          type: string
+          description: "Syncthing config directory (default: ~/.config/syncthing)"
+      required: []
+    timeout_s: 10
+
+  - name: get_device_id
+    description: Get this machine's Syncthing device ID for sharing with peers
+    entrypoint: tools/syncthing_tools.py:get_device_id
+    input_schema:
+      type: object
+      properties:
+        config_dir:
+          type: string
+          description: Syncthing config directory
+      required: []
+    timeout_s: 10
+
+  - name: list_folders
+    description: List all configured Syncthing folders and their sync status
+    entrypoint: tools/syncthing_tools.py:list_folders
+    input_schema:
+      type: object
+      properties:
+        api_key:
+          type: string
+          description: Syncthing API key (reads from config if omitted)
+        port:
+          type: integer
+          description: Syncthing GUI port (default 8384)
+      required: []
+    timeout_s: 15
+
+  - name: generate_config
+    description: Generate a Syncthing config for a new device with sovereign defaults
+    entrypoint: tools/syncthing_tools.py:generate_config
+    input_schema:
+      type: object
+      properties:
+        device_name:
+          type: string
+          description: Human-readable name for this device
+        sync_dirs:
+          type: array
+          items:
+            type: string
+          description: List of directories to sync
+        gui_password:
+          type: string
+          description: Password for the Syncthing web GUI
+      required:
+        - device_name
+    timeout_s: 30
+
+hooks:
+  - event: on_boot
+    entrypoint: hooks/on_boot.py:ensure_running
+    description: Ensure Syncthing is running when the agent starts
+
+dependencies:
+  - name: requests
+    version: ">=2.28"
+    type: python
+
+tags:
+  - sync
+  - storage
+  - sovereign
+  - networking
+  - infrastructure
+
+python_requires: ">=3.10"

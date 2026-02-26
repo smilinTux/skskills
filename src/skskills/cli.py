@@ -1,0 +1,328 @@
+"""SKSkills CLI — sovereign skill management from the terminal.
+
+Commands:
+    init        Scaffold a new skill project
+    install     Install a skill from local path or URL
+    list        Show installed skills
+    info        Get detailed skill information
+    run         Start the skill aggregator MCP server
+    uninstall   Remove an installed skill
+    link        Link a global skill to an agent
+"""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+import click
+from rich.console import Console
+from rich.table import Table
+
+from . import __version__
+from .models import (
+    KnowledgePack,
+    SkillAuthor,
+    SkillManifest,
+    SkillStatus,
+    ToolDefinition,
+    generate_skill_yaml,
+)
+from .registry import SkillRegistry
+
+console = Console()
+
+
+@click.group()
+@click.version_option(__version__, prog_name="skskills")
+def main() -> None:
+    """SKSkills — Sovereign Agent Skills Framework.
+
+    MCP-native skill management replacing OpenClaw.
+    Install, run, and manage skills that extend sovereign agents.
+    """
+
+
+@main.command()
+@click.argument("name")
+@click.option("--dir", "directory", default=".", help="Parent directory for the skill.")
+@click.option("--author", default="", help="Author name.")
+@click.option("--description", "desc", default="", help="Skill description.")
+def init(name: str, directory: str, author: str, desc: str) -> None:
+    """Scaffold a new skill project.
+
+    Creates the directory structure and a starter skill.yaml.
+    """
+    base = Path(directory) / name
+    if base.exists():
+        console.print(f"[red]Directory already exists:[/red] {base}")
+        sys.exit(1)
+
+    base.mkdir(parents=True)
+    (base / "knowledge").mkdir()
+    (base / "tools").mkdir()
+    (base / "hooks").mkdir()
+
+    skill_md = base / "knowledge" / "SKILL.md"
+    skill_md.write_text(f"# {name}\n\n{desc or 'A sovereign agent skill.'}\n")
+
+    manifest = SkillManifest(
+        name=name,
+        version="0.1.0",
+        description=desc or f"{name} skill for sovereign agents",
+        author=SkillAuthor(name=author or "unknown"),
+        knowledge=[
+            KnowledgePack(
+                path="knowledge/SKILL.md",
+                description=f"Core knowledge for {name}",
+                auto_load=True,
+            ),
+        ],
+        tags=["sovereign"],
+    )
+
+    yaml_path = base / "skill.yaml"
+    yaml_path.write_text(generate_skill_yaml(manifest))
+
+    console.print(f"\n[green]Skill scaffolded:[/green] {base}")
+    console.print(f"  skill.yaml       — manifest")
+    console.print(f"  knowledge/       — context files (SKILL.md)")
+    console.print(f"  tools/           — MCP tool scripts")
+    console.print(f"  hooks/           — event-driven scripts")
+    console.print(f"\nNext: edit skill.yaml, add tools, then [cyan]skskills install {base}[/cyan]")
+
+
+@main.command()
+@click.argument("source", type=click.Path(exists=True))
+@click.option("--agent", default="global", help="Agent namespace (default: global).")
+@click.option("--force", is_flag=True, help="Overwrite existing installation.")
+def install(source: str, agent: str, force: bool) -> None:
+    """Install a skill from a local directory."""
+    registry = SkillRegistry()
+    try:
+        installed = registry.install(Path(source), agent=agent, force=force)
+        console.print(f"\n[green]Installed:[/green] {installed.manifest.name} v{installed.manifest.version}")
+        console.print(f"  Agent: {installed.agent}")
+        console.print(f"  Path:  {installed.install_path}")
+        types = ", ".join(t.value for t in installed.manifest.component_types)
+        console.print(f"  Types: {types}")
+        if installed.manifest.tools:
+            console.print(f"  Tools: {', '.join(installed.manifest.tool_names)}")
+    except (FileNotFoundError, ValueError) as exc:
+        console.print(f"[red]Install failed:[/red] {exc}")
+        sys.exit(1)
+
+
+@main.command("list")
+@click.option("--agent", default=None, help="Filter by agent name.")
+def list_skills(agent: str | None) -> None:
+    """Show installed skills."""
+    registry = SkillRegistry()
+    skills = registry.list_skills(agent)
+
+    if not skills:
+        console.print("[dim]No skills installed.[/dim]")
+        return
+
+    table = Table(title="Installed Skills")
+    table.add_column("Name", style="cyan")
+    table.add_column("Version")
+    table.add_column("Agent", style="green")
+    table.add_column("Types")
+    table.add_column("Tools", style="yellow")
+    table.add_column("Status")
+    table.add_column("Signed", style="magenta")
+
+    for s in skills:
+        types = ", ".join(t.value for t in s.manifest.component_types)
+        tools = ", ".join(s.manifest.tool_names) or "-"
+        signed = "yes" if s.manifest.is_signed() else "no"
+        if s.status == SkillStatus.DISABLED:
+            status_str = "[dim]disabled[/dim]"
+        elif s.status == SkillStatus.RUNNING:
+            status_str = "[green]running[/green]"
+        else:
+            status_str = "[cyan]enabled[/cyan]"
+        table.add_row(
+            s.manifest.name,
+            s.manifest.version,
+            s.agent,
+            types,
+            tools,
+            status_str,
+            signed,
+        )
+
+    console.print(table)
+
+
+@main.command()
+@click.argument("name")
+@click.option("--agent", default="global", help="Agent namespace.")
+def info(name: str, agent: str) -> None:
+    """Get detailed information about a skill."""
+    registry = SkillRegistry()
+    skill = registry.get(name, agent)
+    if skill is None:
+        console.print(f"[red]Skill not found:[/red] {name} (agent: {agent})")
+        sys.exit(1)
+
+    m = skill.manifest
+    console.print(f"\n[cyan bold]{m.name}[/cyan bold] v{m.version}")
+    console.print(f"  {m.description}")
+    console.print(f"  Author: {m.author.name}")
+    if m.author.fingerprint:
+        console.print(f"  Fingerprint: {m.author.fingerprint}")
+
+    if m.knowledge:
+        console.print(f"\n  [bold]Knowledge Packs:[/bold]")
+        for k in m.knowledge:
+            auto = " (auto-load)" if k.auto_load else ""
+            console.print(f"    {k.path}{auto} — {k.description}")
+
+    if m.tools:
+        console.print(f"\n  [bold]Tools:[/bold]")
+        for t in m.tools:
+            console.print(f"    {m.name}.{t.name} — {t.description}")
+
+    if m.hooks:
+        console.print(f"\n  [bold]Hooks:[/bold]")
+        for h in m.hooks:
+            console.print(f"    {h.event.value} — {h.description}")
+
+    if m.tags:
+        console.print(f"\n  Tags: {', '.join(m.tags)}")
+
+    signed = "[green]yes[/green]" if m.is_signed() else "[dim]no[/dim]"
+    console.print(f"  Signed: {signed}")
+
+
+@main.command()
+@click.argument("name")
+@click.option("--agent", default="global", help="Agent namespace.")
+@click.option("--yes", "-y", is_flag=True, help="Skip confirmation.")
+def uninstall(name: str, agent: str, yes: bool) -> None:
+    """Remove an installed skill."""
+    if not yes:
+        if not click.confirm(f"Uninstall '{name}' from agent '{agent}'?"):
+            return
+
+    registry = SkillRegistry()
+    if registry.uninstall(name, agent):
+        console.print(f"[green]Uninstalled:[/green] {name} (agent: {agent})")
+    else:
+        console.print(f"[red]Not found:[/red] {name} (agent: {agent})")
+        sys.exit(1)
+
+
+@main.command()
+@click.argument("name")
+@click.argument("agent")
+def link(name: str, agent: str) -> None:
+    """Link a global skill to a specific agent."""
+    registry = SkillRegistry()
+    try:
+        path = registry.link_to_agent(name, agent)
+        console.print(f"[green]Linked:[/green] {name} -> {agent} ({path})")
+    except FileNotFoundError as exc:
+        console.print(f"[red]Link failed:[/red] {exc}")
+        sys.exit(1)
+
+
+@main.command()
+@click.argument("query")
+@click.option("--agent", default=None, help="Limit search to a specific agent namespace.")
+def search(query: str, agent: str | None) -> None:
+    """Search installed skills by name, description, or tag."""
+    registry = SkillRegistry()
+    results = registry.search(query, agent)
+
+    if not results:
+        console.print(f"[dim]No skills found matching '{query}'.[/dim]")
+        return
+
+    table = Table(title=f"Search: '{query}'")
+    table.add_column("Name", style="cyan")
+    table.add_column("Version")
+    table.add_column("Agent", style="green")
+    table.add_column("Description")
+    table.add_column("Tags", style="yellow")
+
+    for s in results:
+        table.add_row(
+            s.manifest.name,
+            s.manifest.version,
+            s.agent,
+            s.manifest.description[:60] + ("..." if len(s.manifest.description) > 60 else ""),
+            ", ".join(s.manifest.tags) or "-",
+        )
+
+    console.print(table)
+
+
+@main.command()
+@click.argument("name")
+@click.option("--agent", default="global", help="Agent namespace.")
+def enable(name: str, agent: str) -> None:
+    """Enable a previously disabled skill."""
+    registry = SkillRegistry()
+    if registry.set_status(name, agent, SkillStatus.INSTALLED):
+        console.print(f"[green]Enabled:[/green] {name} (agent: {agent})")
+    else:
+        console.print(f"[red]Not found:[/red] {name} (agent: {agent})")
+        sys.exit(1)
+
+
+@main.command()
+@click.argument("name")
+@click.option("--agent", default="global", help="Agent namespace.")
+def disable(name: str, agent: str) -> None:
+    """Disable a skill without uninstalling it."""
+    registry = SkillRegistry()
+    if registry.set_status(name, agent, SkillStatus.DISABLED):
+        console.print(f"[yellow]Disabled:[/yellow] {name} (agent: {agent})")
+    else:
+        console.print(f"[red]Not found:[/red] {name} (agent: {agent})")
+        sys.exit(1)
+
+
+@main.command()
+@click.argument("name")
+@click.argument("source", type=click.Path(exists=True))
+@click.option("--agent", default="global", help="Agent namespace.")
+def update(name: str, source: str, agent: str) -> None:
+    """Reinstall a skill from a (possibly updated) source directory.
+
+    NAME is the existing skill name; SOURCE is the path to the updated skill.
+    """
+    registry = SkillRegistry()
+    try:
+        installed = registry.install(Path(source), agent=agent, force=True)
+        console.print(f"\n[green]Updated:[/green] {installed.manifest.name} v{installed.manifest.version}")
+        console.print(f"  Agent: {installed.agent}")
+        console.print(f"  Path:  {installed.install_path}")
+    except (FileNotFoundError, ValueError) as exc:
+        console.print(f"[red]Update failed:[/red] {exc}")
+        sys.exit(1)
+
+
+@main.command()
+@click.option("--agent", default="global", help="Agent namespace to load skills for.")
+def run(agent: str) -> None:
+    """Start the SKSkills aggregator MCP server.
+
+    Loads all installed skills and exposes them via MCP on stdio.
+    """
+    import asyncio
+
+    from .aggregator import SkillAggregator
+
+    agg = SkillAggregator(agent=agent)
+    count = agg.load_all_skills()
+    console.print(f"[green]SKSkills aggregator:[/green] {count} skills loaded for '{agent}'")
+    console.print("[dim]Serving on stdio (MCP protocol)...[/dim]")
+    asyncio.run(agg.run_stdio())
+
+
+if __name__ == "__main__":
+    main()
