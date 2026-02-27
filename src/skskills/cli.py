@@ -324,5 +324,130 @@ def run(agent: str) -> None:
     asyncio.run(agg.run_stdio())
 
 
+# ── Remote registry commands ──────────────────────────────────────────
+
+
+@main.command()
+@click.argument("query")
+@click.option("--registry", default=None, help="Remote registry URL.")
+def remote_search(query: str, registry: str | None) -> None:
+    """Search the remote skill registry."""
+    from .remote import RemoteRegistry
+
+    remote = RemoteRegistry(registry) if registry else RemoteRegistry()
+    try:
+        results = remote.search(query)
+    except ConnectionError as exc:
+        console.print(f"[red]Connection failed:[/red] {exc}")
+        sys.exit(1)
+
+    if not results:
+        console.print(f"[dim]No remote skills found matching '{query}'.[/dim]")
+        return
+
+    table = Table(title=f"Remote: '{query}'")
+    table.add_column("Name", style="cyan")
+    table.add_column("Version")
+    table.add_column("Author", style="green")
+    table.add_column("Description")
+    table.add_column("Tags", style="yellow")
+    table.add_column("Signed", style="magenta")
+
+    for s in results:
+        table.add_row(
+            s.name,
+            s.version,
+            s.author,
+            s.description[:60] + ("..." if len(s.description) > 60 else ""),
+            ", ".join(s.tags) or "-",
+            "yes" if s.signed else "no",
+        )
+
+    console.print(table)
+
+
+@main.command()
+@click.argument("name")
+@click.option("--version", "ver", default=None, help="Specific version to pull.")
+@click.option("--agent", default="global", help="Agent namespace.")
+@click.option("--force", is_flag=True, help="Overwrite existing installation.")
+@click.option("--registry", default=None, help="Remote registry URL.")
+def pull(name: str, ver: str | None, agent: str, force: bool, registry: str | None) -> None:
+    """Download and install a skill from the remote registry."""
+    from .remote import RemoteRegistry
+
+    remote = RemoteRegistry(registry) if registry else RemoteRegistry()
+    try:
+        installed = remote.pull(name, version=ver, agent=agent, force=force)
+        console.print(f"\n[green]Pulled:[/green] {installed.manifest.name} v{installed.manifest.version}")
+        console.print(f"  Agent: {installed.agent}")
+        console.print(f"  Path:  {installed.install_path}")
+        types = ", ".join(t.value for t in installed.manifest.component_types)
+        console.print(f"  Types: {types}")
+    except (ConnectionError, FileNotFoundError, ValueError) as exc:
+        console.print(f"[red]Pull failed:[/red] {exc}")
+        sys.exit(1)
+
+
+@main.command()
+@click.argument("source", type=click.Path(exists=True))
+@click.option("--registry", default=None, help="Remote registry URL.")
+@click.option("--token", envvar="SKSKILLS_TOKEN", help="CapAuth bearer token.")
+def publish(source: str, registry: str | None, token: str | None) -> None:
+    """Publish a skill to the remote registry."""
+    from .remote import RemoteRegistry
+
+    remote = RemoteRegistry(registry) if registry else RemoteRegistry()
+    try:
+        result = remote.publish(Path(source), token=token)
+        console.print(f"\n[green]Published![/green]")
+        if isinstance(result, dict):
+            console.print(f"  Name:    {result.get('name', '?')}")
+            console.print(f"  Version: {result.get('version', '?')}")
+            if result.get("url"):
+                console.print(f"  URL:     {result['url']}")
+    except (ConnectionError, FileNotFoundError, ValueError) as exc:
+        console.print(f"[red]Publish failed:[/red] {exc}")
+        sys.exit(1)
+
+
+@main.command()
+@click.argument("source", type=click.Path(exists=True))
+@click.option("--output", "-o", default=".", help="Output directory for the tarball.")
+def package(source: str, output: str) -> None:
+    """Package a skill into a distributable tarball."""
+    from .remote import RemoteRegistry
+
+    try:
+        tarball = RemoteRegistry.package(Path(source), Path(output))
+        sha256_hash = __import__("hashlib").sha256(tarball.read_bytes()).hexdigest()
+        console.print(f"\n[green]Packaged:[/green] {tarball}")
+        console.print(f"  SHA-256: {sha256_hash}")
+    except (FileNotFoundError, ValueError) as exc:
+        console.print(f"[red]Package failed:[/red] {exc}")
+        sys.exit(1)
+
+
+@main.command()
+@click.argument("repo_url")
+@click.option("--agent", default="global", help="Agent namespace.")
+@click.option("--force", is_flag=True, help="Overwrite existing installation.")
+def clone(repo_url: str, agent: str, force: bool) -> None:
+    """Install a skill from a git repository."""
+    from .remote import RemoteRegistry
+    from .registry import SkillRegistry
+
+    try:
+        skill_dir = RemoteRegistry.from_git(repo_url)
+        registry = SkillRegistry()
+        installed = registry.install(skill_dir, agent=agent, force=force)
+        console.print(f"\n[green]Cloned & installed:[/green] {installed.manifest.name} v{installed.manifest.version}")
+        console.print(f"  Agent: {installed.agent}")
+        console.print(f"  Path:  {installed.install_path}")
+    except (RuntimeError, FileNotFoundError, ValueError) as exc:
+        console.print(f"[red]Clone failed:[/red] {exc}")
+        sys.exit(1)
+
+
 if __name__ == "__main__":
     main()
