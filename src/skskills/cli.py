@@ -25,7 +25,6 @@ from .models import (
     SkillAuthor,
     SkillManifest,
     SkillStatus,
-    ToolDefinition,
     generate_skill_yaml,
 )
 from .registry import SkillRegistry
@@ -85,10 +84,10 @@ def init(name: str, directory: str, author: str, desc: str) -> None:
     yaml_path.write_text(generate_skill_yaml(manifest))
 
     console.print(f"\n[green]Skill scaffolded:[/green] {base}")
-    console.print(f"  skill.yaml       — manifest")
-    console.print(f"  knowledge/       — context files (SKILL.md)")
-    console.print(f"  tools/           — MCP tool scripts")
-    console.print(f"  hooks/           — event-driven scripts")
+    console.print("  skill.yaml       — manifest")
+    console.print("  knowledge/       — context files (SKILL.md)")
+    console.print("  tools/           — MCP tool scripts")
+    console.print("  hooks/           — event-driven scripts")
     console.print(f"\nNext: edit skill.yaml, add tools, then [cyan]skskills install {base}[/cyan]")
 
 
@@ -175,18 +174,18 @@ def info(name: str, agent: str) -> None:
         console.print(f"  Fingerprint: {m.author.fingerprint}")
 
     if m.knowledge:
-        console.print(f"\n  [bold]Knowledge Packs:[/bold]")
+        console.print("\n  [bold]Knowledge Packs:[/bold]")
         for k in m.knowledge:
             auto = " (auto-load)" if k.auto_load else ""
             console.print(f"    {k.path}{auto} — {k.description}")
 
     if m.tools:
-        console.print(f"\n  [bold]Tools:[/bold]")
+        console.print("\n  [bold]Tools:[/bold]")
         for t in m.tools:
             console.print(f"    {m.name}.{t.name} — {t.description}")
 
     if m.hooks:
-        console.print(f"\n  [bold]Hooks:[/bold]")
+        console.print("\n  [bold]Hooks:[/bold]")
         for h in m.hooks:
             console.print(f"    {h.event.value} — {h.description}")
 
@@ -400,7 +399,7 @@ def publish(source: str, registry: str | None, token: str | None) -> None:
     remote = RemoteRegistry(registry) if registry else RemoteRegistry()
     try:
         result = remote.publish(Path(source), token=token)
-        console.print(f"\n[green]Published![/green]")
+        console.print("\n[green]Published![/green]")
         if isinstance(result, dict):
             console.print(f"  Name:    {result.get('name', '?')}")
             console.print(f"  Version: {result.get('version', '?')}")
@@ -434,8 +433,8 @@ def package(source: str, output: str) -> None:
 @click.option("--force", is_flag=True, help="Overwrite existing installation.")
 def clone(repo_url: str, agent: str, force: bool) -> None:
     """Install a skill from a git repository."""
-    from .remote import RemoteRegistry
     from .registry import SkillRegistry
+    from .remote import RemoteRegistry
 
     try:
         skill_dir = RemoteRegistry.from_git(repo_url)
@@ -446,6 +445,239 @@ def clone(repo_url: str, agent: str, force: bool) -> None:
         console.print(f"  Path:  {installed.install_path}")
     except (RuntimeError, FileNotFoundError, ValueError) as exc:
         console.print(f"[red]Clone failed:[/red] {exc}")
+        sys.exit(1)
+
+
+# ── Pip-based install ─────────────────────────────────────────────────────────
+
+
+@main.command("pip-install")
+@click.argument("package")
+@click.option("--agent", default="global", help="Agent namespace (default: global).")
+@click.option("--force", is_flag=True, help="Overwrite existing installation.")
+@click.option(
+    "--no-pip",
+    is_flag=True,
+    default=False,
+    help="Skip running pip install (package must already be installed).",
+)
+def pip_install(package: str, agent: str, force: bool, no_pip: bool) -> None:
+    """Install a skill from a pip package.
+
+    Runs ``pip install <PACKAGE>``, finds the bundled skill.yaml inside the
+    package, and registers the skill locally.
+
+    Examples:
+
+      skskills pip-install skseed
+      skskills pip-install skcapstone --agent lumina
+      skskills pip-install skseed --no-pip   # already installed, just register
+    """
+    from .pip_bridge import install_from_pip
+
+    registry = SkillRegistry()
+    console.print(f"\n  [cyan]pip-install:[/cyan] {package}")
+
+    try:
+        installed = install_from_pip(
+            package,
+            registry,
+            agent=agent,
+            force=force,
+            pip_install=not no_pip,
+        )
+        console.print(f"  [green]Installed:[/green] {installed.manifest.name} v{installed.manifest.version}")
+        console.print(f"  Agent:  {installed.agent}")
+        console.print(f"  Path:   {installed.install_path}")
+        if installed.manifest.tools:
+            console.print(f"  Tools:  {', '.join(installed.manifest.tool_names)}")
+    except (RuntimeError, FileNotFoundError, ValueError) as exc:
+        console.print(f"  [red]pip-install failed:[/red] {exc}")
+        sys.exit(1)
+
+
+# ── Catalog commands ──────────────────────────────────────────────────────────
+
+
+@main.group()
+def catalog() -> None:
+    """Browse and install skills from the curated catalog.
+
+    The catalog lists all first-party smilintux-org skills with their
+    pip/npm/git coordinates.  Skills are independent pip packages — no
+    git submodules required.
+
+    Examples:
+
+      skskills catalog list
+      skskills catalog info skseed
+      skskills catalog install skseed
+      skskills catalog search logic
+    """
+
+
+@catalog.command("list")
+@click.option("--category", default=None, help="Filter by category (core, transport, example).")
+def catalog_list(category: str | None) -> None:
+    """List all skills in the curated catalog."""
+    from .catalog import SkillCatalog
+
+    try:
+        cat = SkillCatalog()
+    except FileNotFoundError as exc:
+        console.print(f"[red]Catalog not found:[/red] {exc}")
+        sys.exit(1)
+
+    entries = cat.list_all(category=category)
+    if not entries:
+        console.print("[dim]No catalog entries found.[/dim]")
+        return
+
+    table = Table(title="SKSkills Catalog" + (f" — {category}" if category else ""))
+    table.add_column("Name", style="cyan")
+    table.add_column("Category", style="green")
+    table.add_column("Pip", style="yellow")
+    table.add_column("Description")
+    table.add_column("Tags", style="dim")
+
+    for e in entries:
+        table.add_row(
+            e.name,
+            e.category,
+            e.pip or "-",
+            (e.description[:55] + "…") if len(e.description) > 55 else e.description,
+            ", ".join(e.tags[:4]) + ("…" if len(e.tags) > 4 else ""),
+        )
+
+    console.print(table)
+    console.print(
+        "\n  [dim]Install any skill:[/dim] [cyan]skskills catalog install <name>[/cyan]"
+    )
+
+
+@catalog.command("info")
+@click.argument("name")
+def catalog_info(name: str) -> None:
+    """Show detailed information about a catalog skill."""
+    from .catalog import SkillCatalog
+
+    cat = SkillCatalog()
+    entry = cat.get(name)
+    if entry is None:
+        console.print(f"[red]Not in catalog:[/red] {name}")
+        console.print("  Try [cyan]skskills catalog search <term>[/cyan] to find it.")
+        sys.exit(1)
+
+    console.print(f"\n[cyan bold]{entry.name}[/cyan bold]  [{entry.category}]")
+    console.print(f"  {entry.description}")
+    if entry.pip:
+        console.print(f"\n  [bold]pip:[/bold]    pip install {entry.pip}")
+    if entry.npm:
+        console.print(f"  [bold]npm:[/bold]    npm install {entry.npm}")
+    if entry.git:
+        console.print(f"  [bold]git:[/bold]    {entry.git}")
+    if entry.tools:
+        console.print(f"\n  [bold]Tools ({len(entry.tools)}):[/bold]  {', '.join(entry.tools)}")
+    if entry.hooks:
+        console.print(f"  [bold]Hooks:[/bold]  {', '.join(entry.hooks)}")
+    console.print(f"\n  [bold]Tags:[/bold]   {', '.join(entry.tags)}")
+    console.print(f"\n  [dim]Install:[/dim] {entry.install_hint}")
+
+
+@catalog.command("search")
+@click.argument("query")
+def catalog_search(query: str) -> None:
+    """Search the catalog by name, description, or tag."""
+    from .catalog import SkillCatalog
+
+    cat = SkillCatalog()
+    results = cat.search(query)
+
+    if not results:
+        console.print(f"[dim]No catalog entries matching '{query}'.[/dim]")
+        return
+
+    table = Table(title=f"Catalog search: '{query}'")
+    table.add_column("Name", style="cyan")
+    table.add_column("Category", style="green")
+    table.add_column("Install", style="yellow")
+    table.add_column("Description")
+
+    for e in results:
+        table.add_row(
+            e.name,
+            e.category,
+            e.install_hint,
+            (e.description[:60] + "…") if len(e.description) > 60 else e.description,
+        )
+
+    console.print(table)
+
+
+@catalog.command("install")
+@click.argument("name")
+@click.option("--agent", default="global", help="Agent namespace (default: global).")
+@click.option("--force", is_flag=True, help="Overwrite existing installation.")
+def catalog_install(name: str, agent: str, force: bool) -> None:
+    """Install a skill from the catalog.
+
+    Looks up the skill in catalog.yaml, then runs the appropriate
+    install method (pip-install for pip packages, clone for git-only skills).
+    """
+    from .catalog import SkillCatalog
+    from .pip_bridge import install_from_pip
+
+    cat = SkillCatalog()
+    entry = cat.get(name)
+    if entry is None:
+        console.print(f"[red]Not in catalog:[/red] {name}")
+        console.print("  Try [cyan]skskills catalog search <term>[/cyan]")
+        sys.exit(1)
+
+    registry = SkillRegistry()
+
+    if entry.is_pip_installable:
+        console.print(f"\n  [cyan]catalog install:[/cyan] {name} (via pip: {entry.pip})")
+        try:
+            installed = install_from_pip(entry.pip, registry, agent=agent, force=force)
+            console.print(f"  [green]Installed:[/green] {installed.manifest.name} v{installed.manifest.version}")
+            console.print(f"  Agent:  {installed.agent}")
+            if installed.manifest.tools:
+                console.print(f"  Tools:  {', '.join(installed.manifest.tool_names)}")
+        except (RuntimeError, FileNotFoundError, ValueError) as exc:
+            console.print(f"  [red]Install failed:[/red] {exc}")
+            sys.exit(1)
+
+    elif entry.git:
+        # Fall back to git clone
+        console.print(f"\n  [cyan]catalog install:[/cyan] {name} (via git: {entry.git})")
+        from .remote import RemoteRegistry
+
+        try:
+            git_url = entry.git
+            if entry.git_path:
+                # Subdirectory skill — clone and install from subdir
+                import subprocess
+                import tempfile
+                with tempfile.TemporaryDirectory() as tmp:
+                    subprocess.run(
+                        ["git", "clone", "--depth=1", git_url, tmp],
+                        check=True,
+                        capture_output=True,
+                    )
+                    skill_dir = Path(tmp) / entry.git_path
+                    installed = registry.install(skill_dir, agent=agent, force=force)
+            else:
+                skill_dir = RemoteRegistry.from_git(git_url)
+                installed = registry.install(skill_dir, agent=agent, force=force)
+
+            console.print(f"  [green]Installed:[/green] {installed.manifest.name}")
+        except Exception as exc:
+            console.print(f"  [red]Install failed:[/red] {exc}")
+            sys.exit(1)
+
+    else:
+        console.print(f"[yellow]No install method available for '{name}'.[/yellow]")
         sys.exit(1)
 
 

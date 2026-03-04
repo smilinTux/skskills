@@ -16,19 +16,20 @@ Skill packages are tarballs: skill-name-0.1.0.tar.gz containing the skill direct
 from __future__ import annotations
 
 import hashlib
-import io
 import json
 import logging
 import shutil
 import tarfile
 import tempfile
 from pathlib import Path
-from typing import Any, Optional
-from urllib.parse import urljoin
+from typing import TYPE_CHECKING, Any, Optional
 
 from pydantic import BaseModel, Field
 
-from .models import SkillManifest, parse_skill_yaml
+from .models import parse_skill_yaml
+
+if TYPE_CHECKING:
+    from .models import InstalledSkill
 
 logger = logging.getLogger("skskills.remote")
 
@@ -90,8 +91,8 @@ class RemoteRegistry:
         Raises:
             ConnectionError: If the request fails.
         """
-        import urllib.request
         import urllib.error
+        import urllib.request
 
         try:
             req = urllib.request.Request(url, headers={"Accept": "application/json"})
@@ -113,8 +114,8 @@ class RemoteRegistry:
         Raises:
             ConnectionError: If the download fails.
         """
-        import urllib.request
         import urllib.error
+        import urllib.request
 
         try:
             urllib.request.urlretrieve(url, str(dest))
@@ -345,8 +346,8 @@ class RemoteRegistry:
             ConnectionError: If the upload fails.
             ValueError: If the skill is invalid.
         """
-        import urllib.request
         import urllib.error
+        import urllib.request
 
         manifest = parse_skill_yaml(skill_dir / "skill.yaml")
 
@@ -355,9 +356,6 @@ class RemoteRegistry:
             tarball = self.package(skill_dir, Path(tmpdir))
             meta_path = tarball.with_suffix(".json")
             meta = json.loads(meta_path.read_text())
-
-            # Upload via multipart POST
-            tarball_bytes = tarball.read_bytes()
 
         url = f"{self.registry_url}/skills"
         headers = {

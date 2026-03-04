@@ -1,0 +1,140 @@
+name: pgp-identity
+version: 0.1.0
+description: >
+  PGP key management for sovereign agent identity.
+  Generate, import, export, and verify PGP keys used by CapAuth.
+  Provides tools for signing messages, verifying signatures, and
+  managing the agent's trust keyring.
+author:
+  name: smilinTux
+  email: admin@smilintux.org
+  fingerprint: CCBE9306410CF8CD5E393D6DEC31663B95230684
+
+knowledge:
+  - path: knowledge/SKILL.md
+    description: PGP identity concepts, CapAuth integration, and key management guide
+    auto_load: true
+
+tools:
+  - name: list_keys
+    description: List PGP keys in the agent keyring (public and secret)
+    entrypoint: tools/pgp_tools.py:list_keys
+    input_schema:
+      type: object
+      properties:
+        secret_only:
+          type: boolean
+          description: "Show only secret keys (default: false)"
+        fingerprint:
+          type: string
+          description: Filter by fingerprint prefix
+      required: []
+    timeout_s: 10
+
+  - name: generate_key
+    description: Generate a new PGP keypair for agent identity
+    entrypoint: tools/pgp_tools.py:generate_key
+    input_schema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Real name for the key UID
+        email:
+          type: string
+          description: Email address for the key UID
+        comment:
+          type: string
+          description: Optional comment (e.g. 'sovereign agent')
+        key_type:
+          type: string
+          description: "Key algorithm: rsa4096 or ed25519 (default: ed25519)"
+          enum: [rsa4096, ed25519]
+        expire:
+          type: string
+          description: "Expiration: '0' = never, '1y', '2y', etc."
+      required:
+        - name
+        - email
+    timeout_s: 60
+    requires_confirmation: true
+
+  - name: sign_message
+    description: Create a detached PGP signature for a message or file
+    entrypoint: tools/pgp_tools.py:sign_message
+    input_schema:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Text to sign (mutually exclusive with file_path)
+        file_path:
+          type: string
+          description: File to sign (mutually exclusive with message)
+        fingerprint:
+          type: string
+          description: Signing key fingerprint (uses default key if omitted)
+        armor:
+          type: boolean
+          description: "Output ASCII-armored signature (default: true)"
+      required: []
+    timeout_s: 30
+
+  - name: verify_signature
+    description: Verify a detached PGP signature against a message or file
+    entrypoint: tools/pgp_tools.py:verify_signature
+    input_schema:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The original message that was signed
+        signature:
+          type: string
+          description: ASCII-armored detached signature
+        expected_fingerprint:
+          type: string
+          description: Expected signer fingerprint (optional extra check)
+      required:
+        - message
+        - signature
+    timeout_s: 15
+
+  - name: export_public_key
+    description: Export an agent's public key as ASCII armor for sharing
+    entrypoint: tools/pgp_tools.py:export_public_key
+    input_schema:
+      type: object
+      properties:
+        fingerprint:
+          type: string
+          description: Key fingerprint to export (uses default if omitted)
+      required: []
+    timeout_s: 10
+
+hooks:
+  - event: on_boot
+    entrypoint: hooks/on_boot.py:verify_identity
+    description: Verify the agent's PGP identity key exists on startup
+    async: true
+
+  - event: on_memory_stored
+    entrypoint: hooks/on_memory_stored.py:sign_memory
+    description: Optionally sign high-importance memories with the agent key
+    async: true
+
+dependencies:
+  - name: gnupg
+    version: ">=2.3"
+    type: python
+
+tags:
+  - identity
+  - security
+  - pgp
+  - capauth
+  - sovereign
+  - cryptography
+  - signing
+
+python_requires: ">=3.10"

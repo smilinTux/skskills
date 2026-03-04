@@ -28,7 +28,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-from .models import InstalledSkill, SkillManifest, SkillStatus, parse_skill_yaml
+from .models import InstalledSkill, SkillStatus, parse_skill_yaml
 
 
 def _default_registry_root() -> Path:
