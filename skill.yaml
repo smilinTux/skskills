@@ -1,0 +1,30 @@
+name: skskills
+version: "0.1.0"
+description: >
+  Sovereign Agent Skills framework — MCP-native skill management replacing
+  OpenClaw. Install, discover, and manage skills from pip packages, git
+  repos, or the remote registry.
+
+author:
+  name: smilinTux.org
+  email: hello@smilintux.org
+
+tags: [skills, mcp, framework, package-manager, sovereign, catalog]
+category: core
+
+tools:
+  - name: skskills_list_tools
+    description: List all installed skill tools across all agents
+    entrypoint: skskills.skill:list_tools
+
+  - name: skskills_install
+    description: Install a skill from pip, git, or the registry
+    entrypoint: skskills.skill:install
+
+  - name: skskills_catalog
+    description: Browse the curated skill catalog
+    entrypoint: skskills.skill:catalog
+
+  - name: skskills_run_tool
+    description: Execute a specific skill tool by qualified name
+    entrypoint: skskills.skill:run_tool

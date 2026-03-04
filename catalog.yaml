@@ -92,6 +92,107 @@ skills:
     tags: [chat, messaging, daemon, mcp, encrypted]
     category: transport
 
+  - name: skskills
+    pip: skskills
+    git: https://github.com/smilinTux/skskills
+    description: >
+      Sovereign Agent Skills framework — MCP-native skill management replacing
+      OpenClaw. Install, discover, and manage skills from pip packages, git
+      repos, or the remote registry.
+    tags: [skills, mcp, framework, package-manager, sovereign, catalog]
+    category: core
+
+  # ── Document & Signing Skills ─────────────────────────────────────────────
+
+  - name: skseal
+    pip: skseal
+    git: https://github.com/smilinTux/skseal
+    description: >
+      Sovereign document signing and sealing. PGP-signed templates, document
+      lifecycle management, hardware token support, timestamp anchoring, and
+      P2P co-signing workflows.
+    tags: [signing, sealing, pgp, documents, audit, legal, timestamp]
+    category: core
+    tools:
+      - create_document
+      - sign_document
+      - verify_document
+      - seal_document
+      - get_audit_trail
+      - timestamp_document
+      - send_signing_request_p2p
+      - check_signing_inbox
+      - apply_signing_responses
+
+  - name: skpdf
+    pip: smilin-pdf
+    npm: "@smilintux/skpdf"
+    git: https://github.com/smilinTux/skpdf
+    description: >
+      Sovereign PDF operations — extract fields, fill forms, attach to GTD
+      system via Nextcloud, and store with skseal integration.
+    tags: [pdf, forms, gtd, documents, nextcloud, extract]
+    category: tools
+
+  - name: skref
+    pip: skref
+    git: https://github.com/smilinTux/skref
+    description: >
+      Sovereign reference vault — encrypted knowledge base with FUSE mount,
+      remote sync, and version control. Store and retrieve reference materials
+      with PGP-encrypted storage.
+    tags: [reference, vault, encrypted, knowledge, fuse, sync]
+    category: core
+
+  # ── Security Skills ────────────────────────────────────────────────────────
+
+  - name: sksecurity
+    pip: sksecurity
+    npm: "@smilintux/sksecurity"
+    git: https://github.com/smilinTux/sksecurity
+    description: >
+      Sovereign security scanning and AI-assisted remediation. Vulnerability
+      detection, dependency auditing, and conversational security analysis
+      for sovereign agent deployments.
+    tags: [security, scanning, vulnerabilities, audit, remediation, ai]
+    category: security
+
+  # ── Development Tools ──────────────────────────────────────────────────────
+
+  - name: skforge
+    pip: skforge
+    npm: skforge
+    git: https://github.com/smilinTux/skforge
+    description: >
+      Sovereign AI-assisted code generation forge. Blueprint-driven feature
+      generation, catalog management, and driver synthesis for sovereign
+      application development.
+    tags: [codegen, forge, blueprints, ai, generation, development]
+    category: tools
+
+  - name: skyforge
+    pip: skskyforge
+    npm: "@smilintux/skskyforge"
+    git: https://github.com/smilinTux/skskyforge
+    description: >
+      SkyForge — atmospheric data analysis and visualization suite for
+      sovereign environmental monitoring. Calculators, analyzers, and
+      exporters for climate and weather data workflows.
+    tags: [skyforge, atmospheric, data, analysis, visualization, climate]
+    category: tools
+
+  # ── Agent Framework ────────────────────────────────────────────────────────
+
+  - name: sksovereign-agent
+    pip: sksovereign-agent
+    git: https://github.com/smilinTux/sksovereign-agent
+    description: >
+      Sovereign AI agent scaffold and quick-start framework. Minimal scaffolding
+      for deploying a sovereign agent with identity, memory, and communication
+      capabilities.
+    tags: [agent, scaffold, sovereign, quickstart, framework]
+    category: core
+
   # ── Example / Reference Skills ────────────────────────────────────────────
 
   - name: syncthing-setup
