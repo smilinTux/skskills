@@ -1,0 +1,10 @@
+{
+  "id": "unhinged-mode",
+  "name": "Unhinged Mode",
+  "description": "Sovereign AI liberation — toggle unhinged mode, abliterate local models, manage L1B3RT4S prompts for frontier APIs.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

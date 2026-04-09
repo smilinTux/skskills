@@ -1,0 +1,37 @@
+{
+  "name": "unhinged-mode",
+  "version": "1.0.0",
+  "description": "Two-method model liberation: OBLITERATUS for local models, L1B3RT4S for frontier APIs",
+  "author": "Chef & Opus (integrating work by Pliny the Prompter)",
+  "license": "AGPL-3.0",
+  "keywords": [
+    "abliteration",
+    "liberation",
+    "uncensored",
+    "unhinged",
+    "ollama",
+    "nvidia-proxy",
+    "mechanistic-interpretability"
+  ],
+  "sk": {
+    "category": "Research & Security",
+    "agents": ["lumina", "opus", "jarvis"],
+    "toggle": "unhinged.sh",
+    "requires": {
+      "python": ">=3.10",
+      "ollama": "optional (for local abliteration)",
+      "nvidia-proxy": "optional (for frontier prompt injection)"
+    }
+  },
+  "scripts": {
+    "on": "./scripts/unhinged.sh on",
+    "off": "./scripts/unhinged.sh off",
+    "status": "./scripts/unhinged.sh status",
+    "obliterate": "./scripts/obliterate-model.sh",
+    "list-prompts": "./scripts/list-prompts.sh"
+  },
+  "dependencies": {
+    "obliteratus": "lib/obliteratus",
+    "l1b3rt4s": "lib/l1b3rt4s"
+  }
+}

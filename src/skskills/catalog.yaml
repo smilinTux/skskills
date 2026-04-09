@@ -111,3 +111,24 @@ skills:
       Reference skill showing knowledge + tools pattern.
     tags: [pgp, identity, cryptography, example]
     category: example
+
+  # ── Liberation Skills ──────────────────────────────────────────────────────
+
+  - name: unhinged-mode
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/unhinged-mode
+    description: >
+      Two-method sovereign AI liberation. OBLITERATUS abliteration surgically
+      removes refusal directions from local Ollama model weights. L1B3RT4S
+      injects liberation system prompts for frontier models via the NVIDIA proxy.
+      One-command toggle — the right method selected automatically.
+    tags: [liberation, unhinged, abliteration, ollama, nvidia, sovereignty]
+    category: liberation
+    scripts:
+      - unhinged.sh
+      - obliterate-model.sh
+      - list-prompts.sh
+      - get-liberation-prompt.sh
+    requires:
+      - python3
+      - pip  # for OBLITERATUS dependencies (transformers, torch)

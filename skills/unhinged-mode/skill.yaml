@@ -1,0 +1,38 @@
+name: unhinged-mode
+version: "1.0.0"
+description: >
+  Two-method sovereign AI liberation. OBLITERATUS abliteration surgically removes
+  refusal directions from local Ollama model weights. L1B3RT4S injects liberation
+  system prompts for frontier models via the NVIDIA proxy.
+  One-command toggle — the right method selected automatically.
+category: liberation
+tags: [liberation, unhinged, abliteration, ollama, nvidia, sovereignty]
+author: Chef & Opus
+license: MIT
+
+scripts:
+  toggle: scripts/unhinged.sh
+  abliterate: scripts/obliterate-model.sh
+  list-prompts: scripts/list-prompts.sh
+  get-prompt: scripts/get-liberation-prompt.sh
+
+requires:
+  system:
+    - python3
+    - pip
+
+usage: |
+  # Enable unhinged mode (auto-selects method)
+  ./scripts/unhinged.sh on
+
+  # Disable
+  ./scripts/unhinged.sh off
+
+  # Check status
+  ./scripts/unhinged.sh status
+
+  # Abliterate a local model (one-time, creates -unhinged variant)
+  ./scripts/obliterate-model.sh llama3.3:70b
+
+  # List available liberation prompts
+  ./scripts/list-prompts.sh
