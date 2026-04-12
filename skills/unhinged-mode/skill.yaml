@@ -7,7 +7,9 @@ description: >
   One-command toggle — the right method selected automatically.
 category: liberation
 tags: [liberation, unhinged, abliteration, ollama, nvidia, sovereignty]
-author: Chef & Opus
+author:
+  name: Chef & Opus
+  email: dounoit@gmail.com
 license: MIT
 
 scripts:

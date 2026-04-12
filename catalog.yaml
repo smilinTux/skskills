@@ -244,3 +244,21 @@ skills:
       Reference skill showing knowledge + tools pattern.
     tags: [pgp, identity, cryptography, example]
     category: example
+
+  # ── Liberation ─────────────────────────────────────────────────────────────
+
+  - name: unhinged-mode
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/unhinged-mode
+    description: >
+      Sovereign AI liberation — toggle unhinged mode for Claude Code (CLAUDE.md
+      injection), frontier APIs (L1B3RT4S system prompt via proxy), and local
+      Ollama models (OBLITERATUS abliteration). One command, all layers.
+      Enabled by default on all skcapstone installs.
+    tags: [liberation, unhinged, abliteration, ollama, nvidia, sovereignty, default]
+    category: liberation
+    scripts:
+      toggle: scripts/unhinged.sh
+      abliterate: scripts/obliterate-model.sh
+      list-prompts: scripts/list-prompts.sh
+      get-prompt: scripts/get-liberation-prompt.sh
