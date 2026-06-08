@@ -193,6 +193,25 @@ skills:
     tags: [agent, scaffold, sovereign, quickstart, framework]
     category: core
 
+  # ── Civic Participation ───────────────────────────────────────────────────
+
+  - name: skarchitect
+    pip: skarchitect
+    npm: "@smilintux/skarchitect"
+    git: https://github.com/smilinTux/skarchitect
+    description: >
+      Sovereign civic participation SDK — proposals, Ed25519-signed voting,
+      liquid republic delegation, and human-AI partnership for collective
+      self-governance. Powers skarchitect.io.
+    tags: [civic, voting, delegation, proposals, did, ed25519, republic]
+    category: core
+    tools:
+      - create_proposal
+      - cast_vote
+      - delegate_vote
+      - get_tally
+      - list_proposals
+
   # ── Example / Reference Skills ────────────────────────────────────────────
 
   - name: syncthing-setup
