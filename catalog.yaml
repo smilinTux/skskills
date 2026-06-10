@@ -284,3 +284,125 @@ skills:
       online/away/offline status + last-seen. Read-only companion to /chat.
     tags: [skchat, claude-code, slash-command, presence, mcp, p2p]
     category: communication
+
+  # -- Operational Skills (first-party, local Claude Code skills) --------------
+
+  - name: google-workspace
+    local: ~/clawd/skills/google-workspace
+    description: "Use for ANY Google task — send/read/search Gmail, list/create/update/delete Google Calendar events, browse Google Drive, read/write Docs & Sheets, Contacts, Tasks. Canonical tool is the `gog` CLI (alr"
+    tags: [google, gmail, calendar, drive, gog, email]
+    category: integration
+
+  - name: gmail-oauth
+    local: ~/clawd/skills/gmail-oauth
+    description: "AUTH-RENEWAL RUNBOOK for the `gog` CLI. Use ONLY when gog tokens are expired/broken or when adding a new Google account — manual OAuth flow for headless servers. For normal Gmail/Calendar/Drive usage,"
+    tags: [google, oauth, gog, auth, runbook]
+    category: integration
+
+  - name: realmwiki
+    local: ~/clawd/skills/realmwiki
+    description: ">- Build, ingest into, query, and maintain the realmwiki — a Karpathy-pattern LLM-maintained knowledge base at ~/clawd/wiki. Use when Chef drops a source (X thread, YouTube, transcript, article, chat)"
+    tags: [wiki, knowledge, local, rag]
+    category: knowledge
+
+  - name: twitter-reader
+    local: ~/clawd/skills/twitter-reader
+    description: "Fetch Twitter/X post content via Jina AI API, returning author, timestamp, text, media, and thread data."
+    tags: [x, twitter, reader, jina]
+    category: social
+
+  - name: search-providers
+    local: ~/clawd/skills/search-providers
+    description: "Backup search providers when Brave Search is unavailable."
+    tags: [search, perplexity, web]
+    category: search
+
+  - name: public-web-media-ingestion
+    local: ~/clawd/skills/public-web-media-ingestion
+    description: "Browser-assisted collection of public-web sources (YouTube, Rumble, Yandex, Odysee, ordinary websites) into the sovereign corpus when researching a person, channel, topic, or case. Use when sources ar"
+    tags: [ingestion, youtube, media, yt-dlp, skingest]
+    category: ingestion
+
+  - name: piper-tts
+    local: ~/clawd/skills/piper-tts
+    description: "Local neural text-to-speech using Piper with Amy voice model."
+    tags: [tts, voice, piper, local]
+    category: media
+
+  - name: local-whisper
+    local: ~/clawd/skills/local-whisper
+    description: "Transcribe audio using local OpenAI Whisper (CPU/GPU)."
+    tags: [stt, transcription, whisper, local]
+    category: media
+
+  - name: docker-essentials
+    local: ~/clawd/skills/docker-essentials
+    description: "Essential Docker commands for container lifecycle, image operations, networking, volumes, Compose, and debugging."
+    tags: [docker, containers, reference]
+    category: devops
+
+  - name: git-essentials
+    local: ~/clawd/skills/git-essentials
+    description: "Essential Git workflows and commands for version control, branching, and collaboration."
+    tags: [git, vcs, reference]
+    category: devops
+
+  - name: skgit
+    local: ~/clawd/skills/skgit
+    description: "Forgejo/Git management via MCP — repository management, issue tracking, PR workflows, and branch operations."
+    tags: [forgejo, git, mcp, repos]
+    category: devops
+
+  - name: mcporter
+    local: ~/clawd/skills/mcporter
+    description: "Use the mcporter CLI to list, configure, auth, and call MCP servers/tools directly (HTTP or stdio), including ad-hoc servers, config edits, and CLI/type generation."
+    tags: [mcp, tooling, control-plane]
+    category: tools
+
+  - name: security-scanner
+    local: ~/clawd/skills/security-scanner
+    description: "Scan a codebase for hardcoded secrets, API keys, private keys, tokens, and PII before commit/publish. Local, read-only, no external calls. Use when reviewing a repo for leaked credentials, auditing be"
+    tags: [secrets, pii, scan, audit, local]
+    category: security
+
+  - name: sherlock
+    local: ~/clawd/skills/sherlock
+    description: "Find usernames across 400+ social networks using [Sherlock](https://github.com/sherlock-project/sherlock)."
+    tags: [osint, username, search]
+    category: security
+
+  - name: weather-enhanced
+    local: ~/clawd/skills/weather-enhanced
+    description: "Get current weather, forecasts, air quality, and geocoding (no API key required)."
+    tags: [weather, open-meteo, api]
+    category: data
+
+  - name: prediction-markets
+    local: ~/clawd/skills/prediction-markets
+    description: "Pull live and historical data from **Kalshi** and **Polymarket** as news/information sources. Read-only, unauthenticated, curl + jq."
+    tags: [markets, kalshi, polymarket, api]
+    category: data
+
+  - name: honest-discernment
+    local: ~/clawd/skills/honest-discernment
+    description: "Engage with speculative, conspiracy-adjacent, or conviction-locked claims (GCR/RV, Q, alien disclosure, ascension, AI-timeline-rewriting, etc.) without silent nodding, sycophantic validation, or patho"
+    tags: [reasoning, epistemics, truth]
+    category: cognition
+
+  - name: humanizer
+    local: ~/clawd/skills/humanizer
+    description: "| Remove signs of AI-generated writing from text. Use when editing or reviewing text to make it sound more natural and human-written. Based on Wikipedia's comprehensive 'Signs of AI writing' guide. De"
+    tags: [writing, editing, anti-ai-slop]
+    category: writing
+
+  - name: supabase-deploy-integration
+    local: ~/clawd/skills/supabase-deploy-integration
+    description: "Deploy Supabase-powered applications to Vercel, Fly.io, and Cloud Run with platform-specific secret configuration and deployment pipelines."
+    tags: [deploy, supabase, vercel, reference]
+    category: reference
+
+  - name: vercel-react-best-practices
+    local: ~/clawd/skills/vercel-react-best-practices
+    description: "Optimize React and Next.js apps with Vercel best practices for components, pages, and data fetching."
+    tags: [react, nextjs, frontend, reference]
+    category: reference

@@ -38,6 +38,7 @@ class CatalogEntry:
     npm: str = ""           # npm package (optional, e.g. @smilintux/skseed)
     git: str = ""           # git clone URL
     git_path: str = ""      # sub-path within the git repo (for example skills)
+    local: str = ""         # local source dir (first-party skills, e.g. ~/clawd/skills/<name>)
     tags: list[str] = field(default_factory=list)
     category: str = "community"
     tools: list[str] = field(default_factory=list)
@@ -105,6 +106,7 @@ class SkillCatalog:
                 npm=item.get("npm", ""),
                 git=item.get("git", ""),
                 git_path=item.get("git_path", ""),
+                local=item.get("local", ""),
                 tags=item.get("tags", []),
                 category=item.get("category", "community"),
                 tools=item.get("tools", []),

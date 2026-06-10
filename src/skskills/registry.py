@@ -184,6 +184,11 @@ class SkillRegistry:
 
         return results
 
+    def list_installed(self, agent: Optional[str] = None) -> list[InstalledSkill]:
+        """Alias for :meth:`list_skills` (stable name used by skcapstone's
+        install wizard). Returns all installed skills, optionally agent-filtered."""
+        return self.list_skills(agent)
+
     def link_to_agent(self, name: str, agent: str) -> Path:
         """Symlink a global skill into an agent's namespace.
 
