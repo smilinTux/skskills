@@ -1,0 +1,27 @@
+name: chat
+version: "1.0.0"
+description: >
+  Inline skchat from Claude Code. The /chat slash skill checks the encrypted P2P
+  skchat inbox via the skchat MCP server, displays new (decrypted, signature-
+  verified) messages in a table, and sends replies through send_message. A thin
+  front end — no transport/identity/crypto reimplementation.
+category: communication
+tags: [skchat, claude-code, slash-command, messaging, mcp, p2p]
+author:
+  name: Chef & Lumina
+  email: dounoit@gmail.com
+license: MIT
+
+requires:
+  mcp:
+    - skchat            # tools: check_inbox / skchat_inbox, send_message / skchat_send
+
+invocation:
+  type: claude-code-skill
+  trigger: "/chat"
+  entrypoint: SKILL.md
+
+usage: |
+  # In Claude Code:
+  /chat
+  # → checks the skchat inbox, lists new messages, offers to reply.

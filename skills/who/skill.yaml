@@ -1,0 +1,26 @@
+name: who
+version: "1.0.0"
+description: >
+  Who's-online for skchat from Claude Code. The /who slash skill queries the skchat
+  MCP server's presence (who_is_online) and shows realm peers with online/away/
+  offline status + last-seen. Read-only companion to /chat.
+category: communication
+tags: [skchat, claude-code, slash-command, presence, mcp, p2p]
+author:
+  name: Chef & Lumina
+  email: dounoit@gmail.com
+license: MIT
+
+requires:
+  mcp:
+    - skchat            # tool: who_is_online / skchat_who_is_online
+
+invocation:
+  type: claude-code-skill
+  trigger: "/who"
+  entrypoint: SKILL.md
+
+usage: |
+  # In Claude Code:
+  /who
+  # → lists realm peers with online/away/offline presence.
