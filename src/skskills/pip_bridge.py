@@ -34,7 +34,7 @@ _SKILL_YAML_CANDIDATES = [
 # Known pip packages that ship a skill.yaml.  Populated from catalog.yaml at runtime.
 _KNOWN_SKILL_PACKAGES: list[str] = [
     "skseed",
-    "skcomm",
+    "skcomms",
     "skchat",
     "skcapstone",
 ]

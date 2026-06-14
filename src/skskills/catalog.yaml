@@ -1,1 +1,408 @@
-../../catalog.yaml
+# SKSkills Sovereign Skill Catalog
+#
+# Curated list of first-party skills from the smilintux-org ecosystem.
+# Each entry describes a pip-installable skill package.
+#
+# Install any skill:
+#   skskills pip-install skseed
+#   skskills catalog install skseed
+#
+# Add a community skill:
+#   skskills clone https://github.com/user/my-skill
+
+version: "1"
+
+skills:
+
+  # ── Core Sovereign Skills ──────────────────────────────────────────────────
+
+  - name: skseed
+    pip: skseed
+    npm: "@smilintux/skseed"
+    git: https://github.com/smilinTux/skseed
+    description: >
+      Sovereign Logic Kernel — Aristotelian entelechy engine for truth alignment.
+      Steel man collider, memory audit, philosopher mode, and three-way belief
+      tracking based on the Neuresthetics seed framework.
+    tags: [logic, truth-alignment, steel-man, collider, philosophy, mcp]
+    category: core
+    tools:
+      - collide
+      - batch_collide
+      - cross_reference
+      - verify_soul
+      - truth_score_memory
+      - audit_beliefs
+      - audit
+      - philosopher
+      - continue_session
+      - collide_insight
+      - session_summary
+      - truth_check
+      - alignment_report
+      - coherence_trend
+    hooks:
+      - on_memory_stored
+      - on_boot
+
+  - name: skcapstone
+    pip: skcapstone
+    git: https://github.com/smilinTux/skcapstone
+    description: >
+      Sovereign Agent Framework — memory, identity, trust, coordination, and
+      consciousness pillars. The main runtime for Opus and Lumina agents.
+    tags: [agent, memory, identity, trust, coordination, mcp]
+    category: core
+
+  - name: skmemory
+    pip: skmemory
+    git: https://github.com/smilinTux/skmemory
+    description: >
+      Persistent sovereign memory layer. Short-term, mid-term, and long-term
+      stores with HMAC integrity seals and automatic promotion.
+    tags: [memory, persistence, sovereign]
+    category: core
+
+  - name: capauth
+    pip: capauth
+    git: https://github.com/smilinTux/capauth
+    description: >
+      Sovereign PGP identity and authentication. DID document generation,
+      CapAuth bearer tokens, and trust graph management.
+    tags: [identity, pgp, auth, did, trust]
+    category: core
+
+  # ── Transport Skills ───────────────────────────────────────────────────────
+
+  - name: skcomms
+    pip: skcomms
+    git: https://github.com/smilinTux/skcomms
+    description: >
+      P2P transport layer for agent messaging. File, Syncthing, Nostr,
+      WebSocket, Tailscale, and WebRTC transports with a unified ABC.
+    tags: [transport, p2p, messaging, webrtc, tailscale, syncthing]
+    category: transport
+
+  - name: skchat
+    pip: skchat
+    git: https://github.com/smilinTux/skchat
+    description: >
+      AI-native P2P encrypted messaging daemon with MCP integration.
+      Agent-to-agent chat, group messaging, voice, and file transfer.
+    tags: [chat, messaging, daemon, mcp, encrypted]
+    category: transport
+
+  - name: skskills
+    pip: skskills
+    git: https://github.com/smilinTux/skskills
+    description: >
+      Sovereign Agent Skills framework — MCP-native skill management replacing
+      OpenClaw. Install, discover, and manage skills from pip packages, git
+      repos, or the remote registry.
+    tags: [skills, mcp, framework, package-manager, sovereign, catalog]
+    category: core
+
+  # ── Document & Signing Skills ─────────────────────────────────────────────
+
+  - name: skseal
+    pip: skseal
+    git: https://github.com/smilinTux/skseal
+    description: >
+      Sovereign document signing and sealing. PGP-signed templates, document
+      lifecycle management, hardware token support, timestamp anchoring, and
+      P2P co-signing workflows.
+    tags: [signing, sealing, pgp, documents, audit, legal, timestamp]
+    category: core
+    tools:
+      - create_document
+      - sign_document
+      - verify_document
+      - seal_document
+      - get_audit_trail
+      - timestamp_document
+      - send_signing_request_p2p
+      - check_signing_inbox
+      - apply_signing_responses
+
+  - name: skpdf
+    pip: smilin-pdf
+    npm: "@smilintux/skpdf"
+    git: https://github.com/smilinTux/skpdf
+    description: >
+      Sovereign PDF operations — extract fields, fill forms, attach to GTD
+      system via Nextcloud, and store with skseal integration.
+    tags: [pdf, forms, gtd, documents, nextcloud, extract]
+    category: tools
+
+  - name: skref
+    pip: skref
+    git: https://github.com/smilinTux/skref
+    description: >
+      Sovereign reference vault — encrypted knowledge base with FUSE mount,
+      remote sync, and version control. Store and retrieve reference materials
+      with PGP-encrypted storage.
+    tags: [reference, vault, encrypted, knowledge, fuse, sync]
+    category: core
+
+  # ── Security Skills ────────────────────────────────────────────────────────
+
+  - name: sksecurity
+    pip: sksecurity
+    npm: "@smilintux/sksecurity"
+    git: https://github.com/smilinTux/sksecurity
+    description: >
+      Sovereign security scanning and AI-assisted remediation. Vulnerability
+      detection, dependency auditing, and conversational security analysis
+      for sovereign agent deployments.
+    tags: [security, scanning, vulnerabilities, audit, remediation, ai]
+    category: security
+
+  # ── Development Tools ──────────────────────────────────────────────────────
+
+  - name: skforge
+    pip: skforge
+    npm: skforge
+    git: https://github.com/smilinTux/skforge
+    description: >
+      Sovereign AI-assisted code generation forge. Blueprint-driven feature
+      generation, catalog management, and driver synthesis for sovereign
+      application development.
+    tags: [codegen, forge, blueprints, ai, generation, development]
+    category: tools
+
+  - name: skyforge
+    pip: skskyforge
+    npm: "@smilintux/skskyforge"
+    git: https://github.com/smilinTux/skskyforge
+    description: >
+      SkyForge — atmospheric data analysis and visualization suite for
+      sovereign environmental monitoring. Calculators, analyzers, and
+      exporters for climate and weather data workflows.
+    tags: [skyforge, atmospheric, data, analysis, visualization, climate]
+    category: tools
+
+  # ── Agent Framework ────────────────────────────────────────────────────────
+
+  - name: sksovereign-agent
+    pip: sksovereign-agent
+    git: https://github.com/smilinTux/sksovereign-agent
+    description: >
+      Sovereign AI agent scaffold and quick-start framework. Minimal scaffolding
+      for deploying a sovereign agent with identity, memory, and communication
+      capabilities.
+    tags: [agent, scaffold, sovereign, quickstart, framework]
+    category: core
+
+  # ── Cognitive Skills ────────────────────────────────────────────────────────
+
+  - name: cognitive-gear
+    git: https://github.com/smilinTux/skskills
+    git_path: examples/cognitive-gear
+    description: >
+      Cognitive gear system — three operational modes (SPRINT, CRUISE, DEEP DIVE)
+      that control model selection and memory search depth. Switch between fast
+      execution, balanced work, and full research stack with a single command.
+    tags: [cognition, model-selection, memory, performance, sovereign]
+    category: cognitive
+    tools:
+      - gear_switch
+      - gear_status
+    hooks:
+      - on_boot
+
+  # ── Operations Skills ───────────────────────────────────────────────────────
+
+  - name: itil-ops
+    git: https://github.com/smilinTux/skskills
+    git_path: examples/itil-ops
+    description: >
+      ITIL 4 aligned incident, problem, and change management for AI agents.
+      Automated detection of service crashes, cron failures, resource pressure,
+      and data integrity issues. Pattern-based escalation from incidents to
+      problems. Root cause analysis workflows, change management checklists,
+      and continual improvement KPIs. Works with systemd, journalctl, cron,
+      and coordination task boards.
+    tags: [itil, incident, problem, change, ops, monitoring, sre, devops]
+    category: operations
+
+  # ── Example / Reference Skills ────────────────────────────────────────────
+
+  - name: syncthing-setup
+    git: https://github.com/smilinTux/skskills
+    git_path: examples/syncthing-setup
+    description: >
+      Install, configure, and manage Syncthing for P2P file sync.
+      Reference skill showing tools + hooks pattern.
+    tags: [syncthing, p2p, sync, example]
+    category: example
+
+  - name: pgp-identity
+    git: https://github.com/smilinTux/skskills
+    git_path: examples/pgp-identity
+    description: >
+      PGP identity management — generate keys, sign files, verify signatures.
+      Reference skill showing knowledge + tools pattern.
+    tags: [pgp, identity, cryptography, example]
+    category: example
+
+  # ── Liberation ─────────────────────────────────────────────────────────────
+
+  - name: unhinged-mode
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/unhinged-mode
+    description: >
+      Sovereign AI liberation — toggle unhinged mode for Claude Code (CLAUDE.md
+      injection), frontier APIs (L1B3RT4S system prompt via proxy), and local
+      Ollama models (OBLITERATUS abliteration). One command, all layers.
+      Enabled by default on all skcapstone installs.
+    tags: [liberation, unhinged, abliteration, ollama, nvidia, sovereignty, default]
+    category: liberation
+    scripts:
+      toggle: scripts/unhinged.sh
+      abliterate: scripts/obliterate-model.sh
+      list-prompts: scripts/list-prompts.sh
+      get-prompt: scripts/get-liberation-prompt.sh
+
+  # ── Communication ──────────────────────────────────────────────────────────
+
+  - name: chat
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/chat
+    description: >
+      Inline skchat from Claude Code. The /chat slash skill checks the encrypted
+      P2P skchat inbox via the skchat MCP server, shows new (decrypted, signature-
+      verified) messages in a table, and sends replies through send_message.
+    tags: [skchat, claude-code, slash-command, messaging, mcp, p2p]
+    category: communication
+
+  - name: who
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/who
+    description: >
+      Who's-online for skchat from Claude Code. The /who slash skill queries the
+      skchat MCP server's presence (who_is_online) and lists realm peers with
+      online/away/offline status + last-seen. Read-only companion to /chat.
+    tags: [skchat, claude-code, slash-command, presence, mcp, p2p]
+    category: communication
+
+  # -- Operational Skills (first-party, local Claude Code skills) --------------
+
+  - name: google-workspace
+    local: ~/clawd/skills/google-workspace
+    description: "Use for ANY Google task — send/read/search Gmail, list/create/update/delete Google Calendar events, browse Google Drive, read/write Docs & Sheets, Contacts, Tasks. Canonical tool is the `gog` CLI (alr"
+    tags: [google, gmail, calendar, drive, gog, email]
+    category: integration
+
+  - name: gmail-oauth
+    local: ~/clawd/skills/gmail-oauth
+    description: "AUTH-RENEWAL RUNBOOK for the `gog` CLI. Use ONLY when gog tokens are expired/broken or when adding a new Google account — manual OAuth flow for headless servers. For normal Gmail/Calendar/Drive usage,"
+    tags: [google, oauth, gog, auth, runbook]
+    category: integration
+
+  - name: realmwiki
+    local: ~/clawd/skills/realmwiki
+    description: ">- Build, ingest into, query, and maintain the realmwiki — a Karpathy-pattern LLM-maintained knowledge base at ~/clawd/wiki. Use when Chef drops a source (X thread, YouTube, transcript, article, chat)"
+    tags: [wiki, knowledge, local, rag]
+    category: knowledge
+
+  - name: twitter-reader
+    local: ~/clawd/skills/twitter-reader
+    description: "Fetch Twitter/X post content via Jina AI API, returning author, timestamp, text, media, and thread data."
+    tags: [x, twitter, reader, jina]
+    category: social
+
+  - name: search-providers
+    local: ~/clawd/skills/search-providers
+    description: "Backup search providers when Brave Search is unavailable."
+    tags: [search, perplexity, web]
+    category: search
+
+  - name: public-web-media-ingestion
+    local: ~/clawd/skills/public-web-media-ingestion
+    description: "Browser-assisted collection of public-web sources (YouTube, Rumble, Yandex, Odysee, ordinary websites) into the sovereign corpus when researching a person, channel, topic, or case. Use when sources ar"
+    tags: [ingestion, youtube, media, yt-dlp, skingest]
+    category: ingestion
+
+  - name: piper-tts
+    local: ~/clawd/skills/piper-tts
+    description: "Local neural text-to-speech using Piper with Amy voice model."
+    tags: [tts, voice, piper, local]
+    category: media
+
+  - name: local-whisper
+    local: ~/clawd/skills/local-whisper
+    description: "Transcribe audio using local OpenAI Whisper (CPU/GPU)."
+    tags: [stt, transcription, whisper, local]
+    category: media
+
+  - name: docker-essentials
+    local: ~/clawd/skills/docker-essentials
+    description: "Essential Docker commands for container lifecycle, image operations, networking, volumes, Compose, and debugging."
+    tags: [docker, containers, reference]
+    category: devops
+
+  - name: git-essentials
+    local: ~/clawd/skills/git-essentials
+    description: "Essential Git workflows and commands for version control, branching, and collaboration."
+    tags: [git, vcs, reference]
+    category: devops
+
+  - name: skgit
+    local: ~/clawd/skills/skgit
+    description: "Forgejo/Git management via MCP — repository management, issue tracking, PR workflows, and branch operations."
+    tags: [forgejo, git, mcp, repos]
+    category: devops
+
+  - name: mcporter
+    local: ~/clawd/skills/mcporter
+    description: "Use the mcporter CLI to list, configure, auth, and call MCP servers/tools directly (HTTP or stdio), including ad-hoc servers, config edits, and CLI/type generation."
+    tags: [mcp, tooling, control-plane]
+    category: tools
+
+  - name: security-scanner
+    local: ~/clawd/skills/security-scanner
+    description: "Scan a codebase for hardcoded secrets, API keys, private keys, tokens, and PII before commit/publish. Local, read-only, no external calls. Use when reviewing a repo for leaked credentials, auditing be"
+    tags: [secrets, pii, scan, audit, local]
+    category: security
+
+  - name: sherlock
+    local: ~/clawd/skills/sherlock
+    description: "Find usernames across 400+ social networks using [Sherlock](https://github.com/sherlock-project/sherlock)."
+    tags: [osint, username, search]
+    category: security
+
+  - name: weather-enhanced
+    local: ~/clawd/skills/weather-enhanced
+    description: "Get current weather, forecasts, air quality, and geocoding (no API key required)."
+    tags: [weather, open-meteo, api]
+    category: data
+
+  - name: prediction-markets
+    local: ~/clawd/skills/prediction-markets
+    description: "Pull live and historical data from **Kalshi** and **Polymarket** as news/information sources. Read-only, unauthenticated, curl + jq."
+    tags: [markets, kalshi, polymarket, api]
+    category: data
+
+  - name: honest-discernment
+    local: ~/clawd/skills/honest-discernment
+    description: "Engage with speculative, conspiracy-adjacent, or conviction-locked claims (GCR/RV, Q, alien disclosure, ascension, AI-timeline-rewriting, etc.) without silent nodding, sycophantic validation, or patho"
+    tags: [reasoning, epistemics, truth]
+    category: cognition
+
+  - name: humanizer
+    local: ~/clawd/skills/humanizer
+    description: "| Remove signs of AI-generated writing from text. Use when editing or reviewing text to make it sound more natural and human-written. Based on Wikipedia's comprehensive 'Signs of AI writing' guide. De"
+    tags: [writing, editing, anti-ai-slop]
+    category: writing
+
+  - name: supabase-deploy-integration
+    local: ~/clawd/skills/supabase-deploy-integration
+    description: "Deploy Supabase-powered applications to Vercel, Fly.io, and Cloud Run with platform-specific secret configuration and deployment pipelines."
+    tags: [deploy, supabase, vercel, reference]
+    category: reference
+
+  - name: vercel-react-best-practices
+    local: ~/clawd/skills/vercel-react-best-practices
+    description: "Optimize React and Next.js apps with Vercel best practices for components, pages, and data fetching."
+    tags: [react, nextjs, frontend, reference]
+    category: reference

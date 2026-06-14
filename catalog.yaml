@@ -74,9 +74,9 @@ skills:
 
   # ── Transport Skills ───────────────────────────────────────────────────────
 
-  - name: skcomm
-    pip: skcomm
-    git: https://github.com/smilinTux/skcomm
+  - name: skcomms
+    pip: skcomms
+    git: https://github.com/smilinTux/skcomms
     description: >
       P2P transport layer for agent messaging. File, Syncthing, Nostr,
       WebSocket, Tailscale, and WebRTC transports with a unified ABC.

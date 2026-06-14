@@ -270,7 +270,7 @@ the **skcapstone** agent runtime (which ships built-in skills under
 `~/.skcapstone/skills/` and uses the registry's `list_installed` in its install
 wizard) and any other MCP agent (Claude Code, …). It optionally leans on **capauth**
 to verify manifest signatures. The catalog points at the rest of the SKWorld
-skills (skseed, skmemory, skcomm, skchat, skseal, …) as installable packages.
+skills (skseed, skmemory, skcomms, skchat, skseal, …) as installable packages.
 
 ```mermaid
 flowchart TD
