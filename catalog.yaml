@@ -407,6 +407,19 @@ skills:
     tags: [react, nextjs, frontend, reference]
     category: reference
 
+  # ── Superpowers (vendored, MIT — Jesse Vincent / obra) ──────────────────────
+  - name: superpowers
+    git: https://github.com/obra/superpowers
+    description: >
+      14 process/workflow skills by Jesse Vincent (obra), MIT-licensed: TDD,
+      systematic debugging, brainstorming, writing-plans, executing-plans,
+      requesting/receiving code review, git worktrees, subagent-driven dev,
+      dispatching parallel agents, verification-before-completion, writing-skills.
+      Vendored into skills/superpowers-* at upstream v6.1.1; this entry tracks
+      the source for future updates. See skills/SUPERPOWERS-LICENSE.
+    tags: [process, workflow, tdd, debugging, community, vendored]
+    category: community
+
 # ── Plugin views (Anthropic envelope grouping) ──────────────────────────────
 plugins:
   - name: skcomms

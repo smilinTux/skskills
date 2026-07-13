@@ -1,0 +1,26 @@
+name: superpowers-brainstorming
+version: "6.1.1"
+description: "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation."
+category: process
+tags: [superpowers, process, workflow, vendored, community]
+author:
+  name: Jesse Vincent (obra)
+  email: jesse@fsck.com
+license: MIT
+
+# Vendored from https://github.com/obra/superpowers @ v6.1.1 (MIT).
+# Upstream skill name: brainstorming. See SUPERPOWERS-LICENSE. Tracked in catalog.yaml.
+provenance:
+  upstream: https://github.com/obra/superpowers
+  upstream_version: "6.1.1"
+  upstream_skill: brainstorming
+
+invocation:
+  type: claude-code-skill
+  trigger: "brainstorming"
+  entrypoint: SKILL.md
+
+knowledge:
+  - path: SKILL.md
+    description: "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation."
+    auto_load: false

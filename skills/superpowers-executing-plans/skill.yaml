@@ -1,0 +1,26 @@
+name: superpowers-executing-plans
+version: "6.1.1"
+description: "Use when you have a written implementation plan to execute in a separate session with review checkpoints"
+category: process
+tags: [superpowers, process, workflow, vendored, community]
+author:
+  name: Jesse Vincent (obra)
+  email: jesse@fsck.com
+license: MIT
+
+# Vendored from https://github.com/obra/superpowers @ v6.1.1 (MIT).
+# Upstream skill name: executing-plans. See SUPERPOWERS-LICENSE. Tracked in catalog.yaml.
+provenance:
+  upstream: https://github.com/obra/superpowers
+  upstream_version: "6.1.1"
+  upstream_skill: executing-plans
+
+invocation:
+  type: claude-code-skill
+  trigger: "executing-plans"
+  entrypoint: SKILL.md
+
+knowledge:
+  - path: SKILL.md
+    description: "Use when you have a written implementation plan to execute in a separate session with review checkpoints"
+    auto_load: false

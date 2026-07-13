@@ -1,0 +1,26 @@
+name: superpowers-test-driven-development
+version: "6.1.1"
+description: "Use when implementing any feature or bugfix, before writing implementation code"
+category: process
+tags: [superpowers, process, workflow, vendored, community]
+author:
+  name: Jesse Vincent (obra)
+  email: jesse@fsck.com
+license: MIT
+
+# Vendored from https://github.com/obra/superpowers @ v6.1.1 (MIT).
+# Upstream skill name: test-driven-development. See SUPERPOWERS-LICENSE. Tracked in catalog.yaml.
+provenance:
+  upstream: https://github.com/obra/superpowers
+  upstream_version: "6.1.1"
+  upstream_skill: test-driven-development
+
+invocation:
+  type: claude-code-skill
+  trigger: "test-driven-development"
+  entrypoint: SKILL.md
+
+knowledge:
+  - path: SKILL.md
+    description: "Use when implementing any feature or bugfix, before writing implementation code"
+    auto_load: false

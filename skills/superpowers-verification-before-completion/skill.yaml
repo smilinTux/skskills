@@ -1,0 +1,26 @@
+name: superpowers-verification-before-completion
+version: "6.1.1"
+description: "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always"
+category: process
+tags: [superpowers, process, workflow, vendored, community]
+author:
+  name: Jesse Vincent (obra)
+  email: jesse@fsck.com
+license: MIT
+
+# Vendored from https://github.com/obra/superpowers @ v6.1.1 (MIT).
+# Upstream skill name: verification-before-completion. See SUPERPOWERS-LICENSE. Tracked in catalog.yaml.
+provenance:
+  upstream: https://github.com/obra/superpowers
+  upstream_version: "6.1.1"
+  upstream_skill: verification-before-completion
+
+invocation:
+  type: claude-code-skill
+  trigger: "verification-before-completion"
+  entrypoint: SKILL.md
+
+knowledge:
+  - path: SKILL.md
+    description: "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always"
+    auto_load: false

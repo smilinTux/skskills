@@ -1,0 +1,26 @@
+name: superpowers-writing-skills
+version: "6.1.1"
+description: "Use when creating new skills, editing existing skills, or verifying skills work before deployment"
+category: process
+tags: [superpowers, process, workflow, vendored, community]
+author:
+  name: Jesse Vincent (obra)
+  email: jesse@fsck.com
+license: MIT
+
+# Vendored from https://github.com/obra/superpowers @ v6.1.1 (MIT).
+# Upstream skill name: writing-skills. See SUPERPOWERS-LICENSE. Tracked in catalog.yaml.
+provenance:
+  upstream: https://github.com/obra/superpowers
+  upstream_version: "6.1.1"
+  upstream_skill: writing-skills
+
+invocation:
+  type: claude-code-skill
+  trigger: "writing-skills"
+  entrypoint: SKILL.md
+
+knowledge:
+  - path: SKILL.md
+    description: "Use when creating new skills, editing existing skills, or verifying skills work before deployment"
+    auto_load: false

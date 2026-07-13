@@ -1,0 +1,26 @@
+name: superpowers-writing-plans
+version: "6.1.1"
+description: "Use when you have a spec or requirements for a multi-step task, before touching code"
+category: process
+tags: [superpowers, process, workflow, vendored, community]
+author:
+  name: Jesse Vincent (obra)
+  email: jesse@fsck.com
+license: MIT
+
+# Vendored from https://github.com/obra/superpowers @ v6.1.1 (MIT).
+# Upstream skill name: writing-plans. See SUPERPOWERS-LICENSE. Tracked in catalog.yaml.
+provenance:
+  upstream: https://github.com/obra/superpowers
+  upstream_version: "6.1.1"
+  upstream_skill: writing-plans
+
+invocation:
+  type: claude-code-skill
+  trigger: "writing-plans"
+  entrypoint: SKILL.md
+
+knowledge:
+  - path: SKILL.md
+    description: "Use when you have a spec or requirements for a multi-step task, before touching code"
+    auto_load: false
