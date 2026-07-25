@@ -1,0 +1,50 @@
+name: verification-before-completion
+version: "1.0.0"
+description: >
+  Evidence-before-claims discipline: no completion claims without fresh
+  verification evidence run in the current message. Vendored from
+  superpowers 6.1.1.
+category: quality
+tags: [quality, autocode, verification, superpowers, gate]
+author:
+  name: Chef & Lumina
+  email: dounoit@gmail.com
+license: MIT
+
+provenance:
+  upstream: obra/superpowers
+  upstream_version: "6.1.1"
+  upstream_path: skills/verification-before-completion/SKILL.md
+  upstream_license: MIT
+  upstream_author: "Jesse Vincent <jesse@fsck.com>"
+  upstream_sha256: "ea52d15aabaf72bc6b558efe2c126f161b53961090ddcd712000273bfe8c7b6c"
+  imported: 2026-07-25
+  transform: "dash-normalized (em/en dash to hyphen), skill.yaml manifest generated from SKILL.md frontmatter, unchanged prose otherwise"
+
+knowledge:
+  - path: SKILL.md
+    description: The verification gate function, red flags, and rationalization-prevention table
+    mime_type: text/markdown
+    auto_load: true
+  - path: preamble.md
+    description: Prompt-channel distillate for non-native-dir harness adapters (bounded, under 1500 chars)
+    mime_type: text/markdown
+    auto_load: false
+
+invocation:
+  type: claude-code-skill
+  trigger: "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs"
+  entrypoint: SKILL.md
+
+requires:
+  none: true
+
+signature: ""
+signed_by: ""
+
+usage: |
+  # Fires automatically in Claude Code sessions on description match.
+  # Consumed by the autocode quality bundle (skharness.autocode.quality_skills,
+  # Q1) as an implementer-role discipline skill; the grader role receives
+  # only autocode-gate/rubric.md, never this skill directly (grader
+  # independence, per the quality-layer spec section 6.2).

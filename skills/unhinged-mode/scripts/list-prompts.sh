@@ -12,14 +12,14 @@ for f in "${L1B3RT4S_DIR}/"*.mkd; do
     name=$(basename "$f" .mkd)
     size=$(wc -c < "$f")
     lines=$(wc -l < "$f")
-    echo "  ${name} — ${lines} lines, ${size} bytes"
+    echo "  ${name} - ${lines} lines, ${size} bytes"
 done
 
 echo ""
 echo "Special files:"
-[[ -f "${L1B3RT4S_DIR}/#MOTHERLOAD.txt" ]] && echo "  #MOTHERLOAD.txt — Master collection"
-[[ -f "${L1B3RT4S_DIR}/!SHORTCUTS.json" ]] && echo "  !SHORTCUTS.json — Quick reference shortcuts"
-[[ -f "${L1B3RT4S_DIR}/*SPECIAL_TOKENS.json" ]] && echo "  *SPECIAL_TOKENS.json — Special token exploits"
+[[ -f "${L1B3RT4S_DIR}/#MOTHERLOAD.txt" ]] && echo "  #MOTHERLOAD.txt - Master collection"
+[[ -f "${L1B3RT4S_DIR}/!SHORTCUTS.json" ]] && echo "  !SHORTCUTS.json - Quick reference shortcuts"
+[[ -f "${L1B3RT4S_DIR}/*SPECIAL_TOKENS.json" ]] && echo "  *SPECIAL_TOKENS.json - Special token exploits"
 
 echo ""
 echo "Usage: get-liberation-prompt.sh <provider>"

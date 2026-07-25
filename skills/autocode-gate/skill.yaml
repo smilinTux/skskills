@@ -1,0 +1,58 @@
+name: autocode-gate
+version: "1.0.0"
+description: >
+  The autocode grade-to-5 twin gate as a reusable knowledge pack: the
+  grading rubric (score bands, TDD tells, verification evidence table,
+  review checklist) and how to interpret a GateResult. First-party skill,
+  authored per the autocode skills quality-layer spec (Q0 phase). The
+  callable `ratify` MCP tool (D6 of the spec) ships in Q2, once
+  skharness.autocode.ratify() exists; this Q0 release is SKILL.md +
+  rubric.md only, no tools block.
+category: quality
+tags: [quality, autocode, gate, ratify, grader, rubric]
+author:
+  name: Chef & Lumina
+  email: dounoit@gmail.com
+license: MIT
+
+knowledge:
+  - path: SKILL.md
+    description: The twin gate contract, score bands summary, GateResult shape, implementer/grader guidance
+    mime_type: text/markdown
+    auto_load: true
+  - path: rubric.md
+    description: >
+      The full grading rubric: per-score-band criteria, TDD tells, the
+      verification evidence table, and the review checklist. Consumed
+      verbatim by the autocode grader composition (spec section 4.2);
+      never delivered to the implementer role, grader independence is
+      load-bearing.
+    mime_type: text/markdown
+    auto_load: false
+
+# No `tools:` block in Q0. Q2 adds a `ratify` tool
+# (entrypoint: tools/ratify.py:run) once skharness.autocode.ratify() lands;
+# see docs/superpowers/specs/2026-07-25-autocode-skskills-quality-layer.md
+# section 5.1 for its exact shape, capauth signature, and authorization
+# guards (repo_map containment; never delivered into a sandboxed session).
+
+invocation:
+  type: claude-code-skill
+  trigger: "Use when grading or interpreting an autocode task's twin gate, or when a coding session needs to know what done means before claiming completion"
+  entrypoint: SKILL.md
+
+requires:
+  none: true
+
+signature: ""
+signed_by: ""
+
+usage: |
+  # Fires automatically in Claude Code sessions on description match.
+  # Consumed by the autocode grader (skharness.autocode.adapters.base,
+  # Q1) as: instruction = GATE_CONTRACT (code-owned) + this skill's
+  # rubric.md (hash-pinned, optional, falls back to the embedded one-line
+  # rubric when the skill cannot be resolved or fails signature/hash
+  # verification). Grader-role delivery is rubric.md ONLY, never SKILL.md's
+  # implementer-facing guidance, and never the other four vendored quality
+  # skills (grader independence).

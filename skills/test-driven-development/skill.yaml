@@ -1,0 +1,54 @@
+name: test-driven-development
+version: "1.0.0"
+description: >
+  Iron-law TDD discipline for coding sessions: failing test first, watch it
+  fail, minimal code to green, refactor. Vendored from superpowers 6.1.1.
+category: quality
+tags: [quality, autocode, tdd, superpowers, gate]
+author:
+  name: Chef & Lumina
+  email: dounoit@gmail.com
+license: MIT
+
+provenance:
+  upstream: obra/superpowers
+  upstream_version: "6.1.1"
+  upstream_path: skills/test-driven-development/SKILL.md
+  upstream_license: MIT
+  upstream_author: "Jesse Vincent <jesse@fsck.com>"
+  upstream_sha256: "b5b4717b8b761cce15a6cfe9022e33fd959e0894c0c39d72c9cb49c23486c10e"
+  imported: 2026-07-25
+  transform: "dash-normalized (em/en dash to hyphen), skill.yaml manifest generated from SKILL.md frontmatter, unchanged prose otherwise"
+
+knowledge:
+  - path: SKILL.md
+    description: Red-green-refactor TDD discipline, the iron law, rationalization counters
+    mime_type: text/markdown
+    auto_load: true
+  - path: testing-anti-patterns.md
+    description: Companion reference on mocking pitfalls and test-only production hooks
+    mime_type: text/markdown
+    auto_load: false
+  - path: preamble.md
+    description: Prompt-channel distillate for non-native-dir harness adapters (bounded, under 1500 chars)
+    mime_type: text/markdown
+    auto_load: false
+
+invocation:
+  type: claude-code-skill
+  trigger: "Use when implementing any feature or bugfix, before writing implementation code"
+  entrypoint: SKILL.md
+
+requires:
+  none: true
+
+signature: ""
+signed_by: ""
+
+usage: |
+  # Fires automatically in Claude Code sessions on description match.
+  # Consumed by the autocode quality bundle (skharness.autocode.quality_skills,
+  # Q1) as an implementer-role discipline skill; delivered native-dir to
+  # claude-code adapters and as a preamble.md distillate to prompt-only
+  # adapters (codex, opencode, pi). See:
+  # docs/superpowers/specs/2026-07-25-autocode-skskills-quality-layer.md

@@ -1,0 +1,55 @@
+name: requesting-code-review
+version: "1.0.0"
+description: >
+  Dispatch-a-fresh-reviewer discipline: request code review after each task,
+  major feature, or before merge, with a reviewer prompt template that
+  carries precisely-crafted context, never session history. Vendored from
+  superpowers 6.1.1.
+category: quality
+tags: [quality, autocode, review, superpowers, gate]
+author:
+  name: Chef & Lumina
+  email: dounoit@gmail.com
+license: MIT
+
+provenance:
+  upstream: obra/superpowers
+  upstream_version: "6.1.1"
+  upstream_path: skills/requesting-code-review/SKILL.md
+  upstream_license: MIT
+  upstream_author: "Jesse Vincent <jesse@fsck.com>"
+  upstream_sha256: "1017ccdd5bc61fab67c654cf118cbdb520464b313073a0a6b9a6b9aa647a3ad6"
+  imported: 2026-07-25
+  transform: "dash-normalized (em/en dash to hyphen), skill.yaml manifest generated from SKILL.md frontmatter, unchanged prose otherwise"
+
+knowledge:
+  - path: SKILL.md
+    description: When and how to request review, the mandatory/optional triggers, feedback triage
+    mime_type: text/markdown
+    auto_load: true
+  - path: code-reviewer.md
+    description: Reviewer subagent prompt template (severity-tiered findings, read-only checkout)
+    mime_type: text/markdown
+    auto_load: false
+  - path: preamble.md
+    description: Prompt-channel distillate for non-native-dir harness adapters (bounded, under 1500 chars)
+    mime_type: text/markdown
+    auto_load: false
+
+invocation:
+  type: claude-code-skill
+  trigger: "Use when completing tasks, implementing major features, or before merging to verify work meets requirements"
+  entrypoint: SKILL.md
+
+requires:
+  none: true
+
+signature: ""
+signed_by: ""
+
+usage: |
+  # Fires automatically in Claude Code sessions on description match.
+  # Consumed by the autocode quality bundle (skharness.autocode.quality_skills,
+  # Q1) as an implementer-role discipline skill; its self-review checklist
+  # is what the requesting-code-review preamble teaches the implementer to
+  # run before ending a round, reducing wasted grader rounds.

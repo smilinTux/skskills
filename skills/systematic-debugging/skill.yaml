@@ -1,0 +1,94 @@
+name: systematic-debugging
+version: "1.0.0"
+description: >
+  Root-cause-before-fix discipline for any bug, test failure, or unexpected
+  behavior: reproduce, trace to the actual cause, understand before
+  proposing fixes. Vendored from superpowers 6.1.1. Per the quality-layer
+  spec's open question 2, this is the seventh (round-2+) skill: delivered to
+  the implementer role only when prior grader feedback is non-empty (CI red
+  / a failed prior round), costing nothing while the bundle is disabled.
+category: quality
+tags: [quality, autocode, debugging, superpowers, gate, round2]
+author:
+  name: Chef & Lumina
+  email: dounoit@gmail.com
+license: MIT
+
+provenance:
+  upstream: obra/superpowers
+  upstream_version: "6.1.1"
+  upstream_path: skills/systematic-debugging/SKILL.md
+  upstream_license: MIT
+  upstream_author: "Jesse Vincent <jesse@fsck.com>"
+  upstream_sha256: "3b20719eca4f0461cb51a195221320d775dcf03b6859271066a03a5132a6ce7a"
+  imported: 2026-07-25
+  transform: "dash-normalized (em/en dash to hyphen; none were present in SKILL.md or companion files), skill.yaml manifest generated from SKILL.md frontmatter, unchanged prose otherwise"
+
+knowledge:
+  - path: SKILL.md
+    description: The systematic debugging discipline (reproduce, isolate, root-cause, minimal fix)
+    mime_type: text/markdown
+    auto_load: true
+  - path: root-cause-tracing.md
+    description: Companion reference on tracing a failure back through the call chain to its origin
+    mime_type: text/markdown
+    auto_load: false
+  - path: defense-in-depth.md
+    description: Companion reference on layered fixes vs. single-point patches
+    mime_type: text/markdown
+    auto_load: false
+  - path: condition-based-waiting.md
+    description: Companion reference on flaky-test root causes from timing assumptions
+    mime_type: text/markdown
+    auto_load: false
+  - path: condition-based-waiting-example.ts
+    description: Worked example for condition-based-waiting.md
+    mime_type: text/plain
+    auto_load: false
+  - path: find-polluter.sh
+    description: Script to bisect a test suite for state-polluting tests
+    mime_type: text/x-shellscript
+    auto_load: false
+  - path: test-pressure-1.md
+    description: Companion case study
+    mime_type: text/markdown
+    auto_load: false
+  - path: test-pressure-2.md
+    description: Companion case study
+    mime_type: text/markdown
+    auto_load: false
+  - path: test-pressure-3.md
+    description: Companion case study
+    mime_type: text/markdown
+    auto_load: false
+  - path: test-academic.md
+    description: Companion case study
+    mime_type: text/markdown
+    auto_load: false
+  - path: CREATION-LOG.md
+    description: Upstream authoring log, vendored for provenance context, not discipline content
+    mime_type: text/markdown
+    auto_load: false
+  - path: preamble.md
+    description: Prompt-channel distillate for non-native-dir harness adapters (bounded, under 1500 chars)
+    mime_type: text/markdown
+    auto_load: false
+
+invocation:
+  type: claude-code-skill
+  trigger: "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes"
+  entrypoint: SKILL.md
+
+requires:
+  none: true
+
+signature: ""
+signed_by: ""
+
+usage: |
+  # Fires automatically in Claude Code sessions on description match.
+  # Consumed by the autocode quality bundle (skharness.autocode.quality_skills,
+  # Q1) as a conditional implementer-role skill: included only on rounds
+  # where prior_feedback is non-empty (a prior grader round scored below 5
+  # or CI came back red). Round-1 sessions never see it, keeping the bundle
+  # bounded on the common path.

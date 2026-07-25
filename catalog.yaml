@@ -299,6 +299,81 @@ skills:
     tags: [canary, monitoring, telegram, sk-alert, heartbeat, round-trip, probe]
     category: monitoring
 
+  # -- Quality (autocode gate) --------------------------------------------------
+  # Vendored superpowers discipline skills (upstream: obra/superpowers, MIT,
+  # pinned to 6.1.1) plus the first-party autocode-gate rubric. Consumed by
+  # the autocode quality bundle (skharness.autocode.quality_skills, Q1 of
+  # docs/superpowers/specs/2026-07-25-autocode-skskills-quality-layer.md).
+  # Each vendored skill.yaml carries a provenance block with upstream_sha256.
+
+  - name: test-driven-development
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/test-driven-development
+    description: >
+      Iron-law TDD discipline for coding sessions: failing test first, watch
+      it fail, minimal code to green, refactor. Vendored from superpowers
+      6.1.1 (upstream obra/superpowers, MIT), dash-normalized, provenance
+      pinned.
+    tags: [quality, autocode, tdd, superpowers, gate]
+    category: quality
+
+  - name: verification-before-completion
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/verification-before-completion
+    description: >
+      Evidence-before-claims discipline: no completion claims without fresh
+      verification evidence run in the current message. Vendored from
+      superpowers 6.1.1 (upstream obra/superpowers, MIT), dash-normalized,
+      provenance pinned.
+    tags: [quality, autocode, verification, superpowers, gate]
+    category: quality
+
+  - name: requesting-code-review
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/requesting-code-review
+    description: >
+      Dispatch-a-fresh-reviewer discipline: request code review after each
+      task, major feature, or before merge, with a severity-tiered reviewer
+      prompt template. Vendored from superpowers 6.1.1 (upstream
+      obra/superpowers, MIT), dash-normalized, provenance pinned.
+    tags: [quality, autocode, review, superpowers, gate]
+    category: quality
+
+  - name: subagent-driven-development
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/subagent-driven-development
+    description: >
+      Fresh-implementer-subagent-per-task discipline: dispatch, review (spec
+      compliance + code quality), broad whole-branch review at the end, and
+      a progress ledger that survives compaction. Vendored from superpowers
+      6.1.1 (upstream obra/superpowers, MIT), dash-normalized, provenance
+      pinned. Native-dir channel only (claude-code adapter).
+    tags: [quality, autocode, subagents, superpowers, gate]
+    category: quality
+
+  - name: systematic-debugging
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/systematic-debugging
+    description: >
+      Root-cause-before-fix discipline for any bug, test failure, or
+      unexpected behavior. Vendored from superpowers 6.1.1 (upstream
+      obra/superpowers, MIT), dash-normalized, provenance pinned. Delivered
+      to the implementer role only on round 2+ (prior feedback non-empty).
+    tags: [quality, autocode, debugging, superpowers, gate, round2]
+    category: quality
+
+  - name: autocode-gate
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/autocode-gate
+    description: >
+      The autocode grade-to-5 twin gate as a reusable knowledge pack: score
+      bands, TDD tells, verification evidence table, review checklist, and
+      how to interpret a GateResult. First-party, authored (not vendored).
+      Q0 release is SKILL.md + rubric.md; the callable ratify MCP tool
+      ships in Q2 once skharness.autocode.ratify() exists.
+    tags: [quality, autocode, gate, ratify, grader, rubric]
+    category: quality
+
   # -- Operational Skills (first-party, local Claude Code skills) --------------
 
   - name: google-workspace

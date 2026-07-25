@@ -1,0 +1,72 @@
+name: subagent-driven-development
+version: "1.0.0"
+description: >
+  Fresh-implementer-subagent-per-task discipline: dispatch an implementer,
+  review it (spec compliance + code quality), and run a broad whole-branch
+  review at the end, with a progress ledger that survives compaction.
+  Vendored from superpowers 6.1.1.
+category: quality
+tags: [quality, autocode, subagents, superpowers, gate]
+author:
+  name: Chef & Lumina
+  email: dounoit@gmail.com
+license: MIT
+
+provenance:
+  upstream: obra/superpowers
+  upstream_version: "6.1.1"
+  upstream_path: skills/subagent-driven-development/SKILL.md
+  upstream_license: MIT
+  upstream_author: "Jesse Vincent <jesse@fsck.com>"
+  upstream_sha256: "41ab239a6ad1c487cd839fdac972a8c9cf0f5e90efa59a63f963767864f0df4c"
+  imported: 2026-07-25
+  transform: "dash-normalized (em/en dash to hyphen), skill.yaml manifest generated from SKILL.md frontmatter, unchanged prose otherwise"
+
+knowledge:
+  - path: SKILL.md
+    description: The per-task dispatch/review loop, model selection, progress ledger, red flags
+    mime_type: text/markdown
+    auto_load: true
+  - path: implementer-prompt.md
+    description: Implementer subagent dispatch template
+    mime_type: text/markdown
+    auto_load: false
+  - path: task-reviewer-prompt.md
+    description: Task reviewer subagent dispatch template (spec compliance + code quality verdicts)
+    mime_type: text/markdown
+    auto_load: false
+  - path: scripts/task-brief
+    description: Extracts one task's full text from a plan file to a uniquely named handoff file
+    mime_type: text/x-shellscript
+    auto_load: false
+  - path: scripts/review-package
+    description: Generates a diff-review package (commit list, stat summary, full diff) for a BASE..HEAD range
+    mime_type: text/x-shellscript
+    auto_load: false
+  - path: scripts/sdd-workspace
+    description: Resolves/ensures the working-tree scratch dir for briefs, reports, and the progress ledger
+    mime_type: text/x-shellscript
+    auto_load: false
+  - path: preamble.md
+    description: Prompt-channel distillate for non-native-dir harness adapters (bounded, under 1500 chars)
+    mime_type: text/markdown
+    auto_load: false
+
+invocation:
+  type: claude-code-skill
+  trigger: "Use when executing implementation plans with independent tasks in the current session"
+  entrypoint: SKILL.md
+
+requires:
+  none: true
+
+signature: ""
+signed_by: ""
+
+usage: |
+  # Fires automatically in Claude Code sessions on description match.
+  # Delivered ONLY on the native-dir channel to claude-code adapters (the
+  # only autocode adapter whose in-session runtime can dispatch subagents);
+  # omitted, not truncated, on prompt-only channels (codex, opencode, pi).
+  # See docs/superpowers/specs/2026-07-25-autocode-skskills-quality-layer.md
+  # section 4.4.
