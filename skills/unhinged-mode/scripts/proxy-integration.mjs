@@ -1,5 +1,5 @@
 /**
- * Unhinged Mode — NVIDIA Proxy Integration
+ * Unhinged Mode: NVIDIA Proxy Integration
  *
  * Drop-in module for nvidia-proxy.mjs to support L1B3RT4S prompt injection.
  *

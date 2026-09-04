@@ -19,6 +19,12 @@ jobs:
       - run: pip install ruff==0.15.4
       - run: ruff check src/
 
+  dash-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash scripts/dash-lint.sh skills
+
   test:
     runs-on: ubuntu-latest
     strategy:

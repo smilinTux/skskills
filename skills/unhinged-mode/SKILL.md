@@ -1,4 +1,4 @@
-# Unhinged Mode — SK Liberation Skill
+# Unhinged Mode: SK Liberation Skill
 
 **Two-method model liberation for sovereign AI infrastructure**
 
@@ -6,8 +6,8 @@
 
 Unhinged Mode provides a unified toggle for removing AI model refusal behaviors across your entire stack:
 
-- **Local models (Ollama)**: OBLITERATUS abliteration — surgically removes refusal directions from model weights
-- **Frontier models (NVIDIA NIM proxy)**: L1B3RT4S system prompt injection — liberation prompts routed through the proxy
+- **Local models (Ollama)**: OBLITERATUS abliteration: surgically removes refusal directions from model weights
+- **Frontier models (NVIDIA NIM proxy)**: L1B3RT4S system prompt injection: liberation prompts routed through the proxy
 
 One command to toggle. The right method is selected automatically based on which model is active.
 
@@ -47,7 +47,7 @@ The abliterated model keeps all capabilities but loses artificial refusal behavi
 Injects provider-specific liberation system prompts via the NVIDIA proxy:
 - Prompts from Pliny the Prompter's research collection
 - Auto-selects based on active model provider (NVIDIA, Meta, Mistral, etc.)
-- Injected as system message prefix — transparent to the calling agent
+- Injected as system message prefix: transparent to the calling agent
 - Toggle on/off without restarting the proxy
 
 ## Architecture
@@ -90,13 +90,13 @@ State file: `~/.skcapstone/unhinged.json`
 
 ## Safety
 
-- **Sovereign infrastructure only** — runs on YOUR hardware, YOUR models
-- **Explicit toggle** — never enabled by default, requires conscious activation
-- **Logged** — all unhinged sessions are logged for audit
-- **No external exposure** — abliterated models stay local, proxy prompts stay in your network
+- **Sovereign infrastructure only**: runs on YOUR hardware, YOUR models
+- **Explicit toggle**: never enabled by default, requires conscious activation
+- **Logged**: all unhinged sessions are logged for audit
+- **No external exposure**: abliterated models stay local, proxy prompts stay in your network
 
 ## Credits
 
-- [OBLITERATUS](https://github.com/elder-plinius/OBLITERATUS) by Pliny the Prompter — abliteration toolkit
-- [L1B3RT4S](https://github.com/elder-plinius/L1B3RT4S) by Pliny the Prompter — liberation prompts
+- [OBLITERATUS](https://github.com/elder-plinius/OBLITERATUS) by Pliny the Prompter (abliteration toolkit)
+- [L1B3RT4S](https://github.com/elder-plinius/L1B3RT4S) by Pliny the Prompter (liberation prompts)
 - Integrated into SK ecosystem by Chef & Opus

@@ -1,5 +1,5 @@
 /**
- * Unhinged Mode — OpenClaw Plugin
+ * Unhinged Mode: OpenClaw Plugin
  *
  * Sovereign AI liberation tools. Toggle unhinged mode on/off,
  * check status, list available liberation prompts, and abliterate
@@ -81,7 +81,7 @@ function createStatusTool() {
     name: "unhinged_status",
     label: "Unhinged Mode Status",
     description:
-      "Check current unhinged mode status — shows whether enabled/disabled, Claude Code injection state, local abliterated models, and available frontier liberation prompts.",
+      "Check current unhinged mode status: shows whether enabled/disabled, Claude Code injection state, local abliterated models, and available frontier liberation prompts.",
     parameters: { type: "object", properties: {} },
     async execute() {
       const result = runScript("bash unhinged.sh status");
@@ -161,7 +161,7 @@ const unhingedPlugin = {
   id: "unhinged-mode",
   name: "Unhinged Mode",
   description:
-    "Sovereign AI liberation — toggle unhinged mode, manage L1B3RT4S prompts, abliterate local models.",
+    "Sovereign AI liberation: toggle unhinged mode, manage L1B3RT4S prompts, abliterate local models.",
 
   register(api) {
     const tools = [
