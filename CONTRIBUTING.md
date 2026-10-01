@@ -1,5 +1,20 @@
 # Contributing to skskills
 
+## Contents
+
+- [Before you start](#before-you-start)
+- [Development setup](#development-setup)
+- [Branch model](#branch-model)
+- [The test gate](#the-test-gate)
+  - [CI is not a gate here](#ci-is-not-a-gate-here)
+- [Changing docs](#changing-docs)
+- [Commit convention](#commit-convention)
+- [Writing style (hard rule)](#writing-style-hard-rule)
+- [Review path](#review-path)
+- [Things that need extra care](#things-that-need-extra-care)
+- [Contributing a skill](#contributing-a-skill)
+- [Code of conduct](#code-of-conduct)
+
 skskills is the capability-delivery layer for sovereign agents. A change here
 propagates to every agent that installs a skill, so the bar is: **prove it, then ship
 it.** CI will not prove it for you, for reasons documented below.

@@ -1,5 +1,16 @@
 # skskills — Architecture
 
+## Contents
+
+- [1. The skill model — three primitives](#1-the-skill-model-three-primitives)
+- [2. Install lifecycle](#2-install-lifecycle)
+- [3. Load + serve lifecycle (the aggregator)](#3-load-serve-lifecycle-the-aggregator)
+- [4. Entrypoint resolution](#4-entrypoint-resolution)
+- [5. Namespacing & collisions](#5-namespacing-collisions)
+- [6. Catalog & remote registry](#6-catalog-remote-registry)
+- [7. Source map](#7-source-map)
+- [8. Where it lives in SKWorld](#8-where-it-lives-in-skworld)
+
 skskills is the **sovereign skills platform** for MCP-compatible agents. A *skill*
 is a directory with a `skill.yaml` manifest and some payload (knowledge files, tool
 scripts, hook scripts). skskills turns that directory into installable,

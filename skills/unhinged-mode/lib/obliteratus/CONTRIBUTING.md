@@ -1,5 +1,18 @@
 # Contributing to OBLITERATUS
 
+## Contents
+
+- [Development Setup](#development-setup)
+- [Running Tests](#running-tests)
+- [Code Style](#code-style)
+- [Submitting Changes](#submitting-changes)
+- [Pull Request Guidelines](#pull-request-guidelines)
+- [Contributing Experiment Results](#contributing-experiment-results)
+- [Project Structure](#project-structure)
+- [Reporting Bugs](#reporting-bugs)
+- [Security Issues](#security-issues)
+- [License](#license)
+
 Thanks for your interest in contributing. This document covers everything you need to get started.
 
 ## Development Setup
