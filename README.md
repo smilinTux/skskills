@@ -1,5 +1,14 @@
 # skskills — Sovereign Agent Skills 🐧
 
+## Contents
+
+- [The 60-second version](#the-60-second-version)
+- [Quickstart](#quickstart)
+- [What skskills provides](#what-skskills-provides)
+- [Where it lives in SKStack v2](#where-it-lives-in-skstack-v2)
+  - [Docs index](#docs-index)
+- [A skill manifest](#a-skill-manifest)
+
 > **Skills your agent owns — install, run, and share capabilities like packages,
 > with one MCP socket for the whole fleet.** A skill is a self-describing bundle
 > of *knowledge*, *tools*, and *hooks*; skskills installs them, namespaces them

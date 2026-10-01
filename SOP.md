@@ -1,5 +1,37 @@
 # SKSkills - Standard Operating Procedures
 
+## Contents
+
+- [1. Overview](#1-overview)
+  - [What it owns](#what-it-owns)
+  - [What it explicitly does NOT do](#what-it-explicitly-does-not-do)
+- [2. Architecture](#2-architecture)
+  - [Start here](#start-here)
+- [3. Build](#3-build)
+  - [3.1 Build the Python package](#31-build-the-python-package)
+  - [3.2 Build the Claude plugin envelope (the compiler)](#32-build-the-claude-plugin-envelope-the-compiler)
+- [4. Test](#4-test)
+  - [The release gate](#the-release-gate)
+  - [Self-report](#self-report)
+- [5. Release / Deploy](#5-release-deploy)
+  - [5.1 Artifacts](#51-artifacts)
+  - [5.2 Version bump (read this before tagging)](#52-version-bump-read-this-before-tagging)
+  - [5.3 Rollback](#53-rollback)
+  - [Front-end / Exposure](#front-end-exposure)
+- [6. Configuration / Usage](#6-configuration-usage)
+  - [6.1 Environment](#61-environment)
+  - [6.2 Registry layout](#62-registry-layout)
+  - [6.3 Skill discovery roots (the real topology)](#63-skill-discovery-roots-the-real-topology)
+  - [6.4 Everyday usage](#64-everyday-usage)
+- [7. API / Reference](#7-api-reference)
+  - [7.1 CLI](#71-cli)
+  - [7.2 MCP tools exposed by the aggregator](#72-mcp-tools-exposed-by-the-aggregator)
+  - [7.3 Manifest schema](#73-manifest-schema)
+  - [7.4 Known manifest drift (do not trust the root skill.yaml)](#74-known-manifest-drift-do-not-trust-the-root-skillyaml)
+- [8. Troubleshooting](#8-troubleshooting)
+- [9. Maturity-tier + Version reference](#9-maturity-tier-version-reference)
+- [Unverified / needs an operator pass](#unverified-needs-an-operator-pass)
+
 **Kind:** library (Python package + CLI + stdio MCP aggregator, also published as an npm shell package).
 **Maturity-tier:** T0 (classical). See [§9](#9-maturity-tier--version-reference).
 **Canonical-home:** this file.

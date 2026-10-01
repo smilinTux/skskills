@@ -1,5 +1,35 @@
 # Changelog
 
+## Contents
+
+- [[Unreleased]](#unreleased)
+  - [Fixed](#fixed)
+  - [Changed](#changed)
+  - [Added](#added)
+  - [Documented (no code change)](#documented-no-code-change)
+  - [Not changed](#not-changed)
+- [[0.2.0] - 2026-07-03](#020---2026-07-03)
+  - [Added](#added-1)
+  - [Fixed](#fixed-1)
+- [[Untagged] - 2026-07-24](#untagged---2026-07-24)
+  - [Added](#added-2)
+- [[Untagged] - 2026-06-13](#untagged---2026-06-13)
+  - [Changed](#changed-1)
+- [[v1.1.1] - 2026-06-10](#v111---2026-06-10)
+  - [Added](#added-3)
+  - [Fixed](#fixed-2)
+- [[0.1.1] - 2026-04-12](#011---2026-04-12)
+  - [Added](#added-4)
+  - [Fixed](#fixed-3)
+- [[v1.1.0] - 2026-03-21](#v110---2026-03-21)
+  - [Added](#added-5)
+- [[Untagged] - 2026-03-04](#untagged---2026-03-04)
+  - [Added](#added-6)
+- [[Untagged] - 2026-02-27](#untagged---2026-02-27)
+  - [Added](#added-7)
+- [[Untagged] - 2026-02-26](#untagged---2026-02-26)
+  - [Added](#added-8)
+
 All notable changes to skskills are documented here.
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
