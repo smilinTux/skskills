@@ -1,0 +1,26 @@
+# Vendored from heygen-com/hyperframes@e1925d4317fc by scripts/vendor_skills.py. Do not edit; re-run to refresh.
+name: hyperframes-keyframes
+version: 0.8.149
+description: Use when a HyperFrames composition needs a punch-in, punch-out, zoom, reframe, Ken Burns
+  treatment, camera move, visual match/whip handoff, or other seek-safe 2D/3D keyframes; also for GSAP,
+  CSS keyframes, Anime.js, WAAPI, FLIP, paths, masks, SVG morph/draw, text trails, 3D depth, or `hyperframes
+  keyframes` diagnostics. Don't use for broad scene strategy, brand design, media sourcing, captions,
+  or general video planning.
+category: media
+tags:
+- video
+- hyperframes
+- motion-graphics
+author:
+  name: heygen-com
+license: Apache-2.0
+upstream:
+  repo: https://github.com/heygen-com/hyperframes
+  path: skills/hyperframes-keyframes
+  commit: e1925d4317fcd13c0e5799cd4767a3e2dd4c9238
+invocation:
+  type: claude-code-skill
+  trigger: /hyperframes-keyframes
+  entrypoint: SKILL.md
+requires:
+  runtime: Node.js 22+ and FFmpeg; skills call the HyperFrames CLI via npx hyperframes

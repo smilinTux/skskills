@@ -47,6 +47,9 @@ FENCE_RE = re.compile(r"^(\s*)(`{3,}|~{3,})")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*#*\s*$")
 FRONTMATTER_DELIM = "---"
 MAX_SCAN_LINES_FOR_EXISTING_TOC = 40
+# Third-party skills vendored by scripts/vendor_skills.py declare `upstream:`
+# in skill.yaml. Their docs stay byte-identical to upstream, so skip them.
+UPSTREAM_RE = re.compile(r"^upstream:", re.MULTILINE)
 
 
 class Heading:
@@ -58,11 +61,31 @@ class Heading:
         self.line_index = line_index
 
 
+def is_upstream_skill(skill_dir: Path) -> bool:
+    """True when skill_dir's skill.yaml marks it as a vendored third-party skill."""
+    try:
+        return bool(UPSTREAM_RE.search((skill_dir / "skill.yaml").read_text(encoding="utf-8")))
+    except (UnicodeDecodeError, OSError):
+        return False
+
+
+def find_upstream_dirs(root: Path) -> list[Path]:
+    """Vendored third-party skill dirs under root (see is_upstream_skill)."""
+    return [p.parent for p in root.rglob("skill.yaml") if is_upstream_skill(p.parent)]
+
+
+def under_any(path: Path, dirs: list[Path]) -> bool:
+    return any(path == d or d in path.parents for d in dirs)
+
+
 def find_skill_dirs(root: Path) -> list[Path]:
     """Directories that directly contain a SKILL.md, skipping vendored dirs."""
+    upstream = find_upstream_dirs(root)
     out = []
     for skill_md in root.rglob("SKILL.md"):
         if any(part in VENDORED_DIR_NAMES for part in skill_md.parts):
+            continue
+        if under_any(skill_md.parent, upstream):
             continue
         out.append(skill_md.parent)
     return out
@@ -73,12 +96,15 @@ def find_target_files(roots: list[Path]) -> list[Path]:
     files: set[Path] = set()
     for root in roots:
         root = root.resolve()
+        upstream = find_upstream_dirs(root)
         for skill_dir in find_skill_dirs(root):
             for pattern in ("*.md", "*.markdown"):
                 for md in skill_dir.rglob(pattern):
                     if md.name == "SKILL.md":
                         continue
                     if any(part in VENDORED_DIR_NAMES for part in md.parts):
+                        continue
+                    if under_any(md, upstream):
                         continue
                     files.add(md)
     out = []

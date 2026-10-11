@@ -1,0 +1,6 @@
+version: 2
+secret:
+  # HeyGen's public PostHog ingestion key, vendored verbatim from
+  # heygen-com/hyperframes. Mirrors the pinned allowlist in .gitleaks.toml.
+  paths-ignore:
+    - skills/media-use/scripts/lib/telemetry.mjs
