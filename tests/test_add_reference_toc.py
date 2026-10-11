@@ -259,3 +259,22 @@ def test_vendored_dirs_are_skipped(tmp_path):
 
     files = toc.find_target_files([tmp_path])
     assert all("node_modules" not in str(p) for p in files)
+
+
+def test_upstream_vendored_skills_are_skipped(tmp_path):
+    (tmp_path / "SKILL.md").write_text("# Repo Skill\n", encoding="utf-8")
+    skill_dir = make_skill(tmp_path, "thirdparty")
+    (skill_dir / "skill.yaml").write_text(
+        "name: thirdparty\nupstream:\n  repo: https://example.com/x\n", encoding="utf-8"
+    )
+    nested = skill_dir / "sub"
+    nested.mkdir()
+    (nested / "SKILL.md").write_text("# Nested\n", encoding="utf-8")
+    long_text = "# Title\n\n" + "\n".join(f"## H{i}\n\nbody\n" for i in range(60))
+    (skill_dir / "ref.md").write_text(long_text, encoding="utf-8")
+    (nested / "ref.md").write_text(long_text, encoding="utf-8")
+    own = make_skill(tmp_path, "own")
+    (own / "ref.md").write_text(long_text, encoding="utf-8")
+
+    files = toc.find_target_files([tmp_path])
+    assert files == [own / "ref.md"]

@@ -1,0 +1,25 @@
+# Vendored from heygen-com/hyperframes@e1925d4317fc by scripts/vendor_skills.py. Do not edit; re-run to refresh.
+name: figma
+version: 0.8.149
+description: Import Figma content into a HyperFrames composition — rendered assets, brand tokens, components,
+  storyboard sections → reconstructed motion (frames read as states, not slides) (REST/CLI), connector-assisted
+  motion when available, and shaders from a connector or native export. Use when the user pastes a figma.com
+  link or asks to bring a Figma design, frame, logo, brand, or animation into a video/composition.
+category: media
+tags:
+- video
+- hyperframes
+- motion-graphics
+author:
+  name: heygen-com
+license: Apache-2.0
+upstream:
+  repo: https://github.com/heygen-com/hyperframes
+  path: skills/figma
+  commit: e1925d4317fcd13c0e5799cd4767a3e2dd4c9238
+invocation:
+  type: claude-code-skill
+  trigger: /figma
+  entrypoint: SKILL.md
+requires:
+  runtime: Node.js 22+ and FFmpeg; skills call the HyperFrames CLI via npx hyperframes

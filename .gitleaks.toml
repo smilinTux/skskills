@@ -1,0 +1,12 @@
+# Default gitleaks rules plus narrow allowlists. Keep each entry scoped to one
+# value shape AND one path; never allowlist a whole rule or directory. Do not
+# paste the allowlisted secret itself here: other scanners flag this file too.
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "HeyGen's public PostHog ingestion key (phc_ keys are write-only and ship in client code), vendored verbatim from heygen-com/hyperframes skills/media-use"
+condition = "AND"
+regexes = ['''^phc_[A-Za-z0-9]{43}$''']
+paths = ['''^skills/media-use/scripts/lib/telemetry\.mjs$''']
