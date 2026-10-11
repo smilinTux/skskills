@@ -28,7 +28,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+from . import agent_links
 from .models import InstalledSkill, SkillStatus, parse_skill_yaml
+
+
+def _links_enabled() -> bool:
+    return agent_links.enabled()
 
 
 def _default_registry_root() -> Path:
@@ -48,10 +53,15 @@ class SkillRegistry:
 
     Args:
         root: Base directory for skills (default: SKSKILLS_HOME or ~/.skskills).
+        agent_links: Symlink global installs into agent frameworks (Claude Code,
+            Codex, pi, Hermes, OpenCode). Defaults to on for the default
+            registry and off for an explicit ``root``; SKSKILLS_AGENT_LINKS=0
+            always turns it off. See :mod:`skskills.agent_links`.
     """
 
-    def __init__(self, root: Optional[Path] = None) -> None:
+    def __init__(self, root: Optional[Path] = None, agent_links: Optional[bool] = None) -> None:
         self.root = (root or _default_registry_root()).expanduser()
+        self.agent_links = (root is None if agent_links is None else agent_links) and _links_enabled()
         self.installed_dir = self.root / "installed"
         self.agents_dir = self.root / "agents"
         self.index_path = self.root / "registry.json"
@@ -107,6 +117,8 @@ class SkillRegistry:
         )
 
         self._update_index(installed)
+        if self.agent_links and agent == "global":
+            agent_links.link_skill(target, self.installed_dir)
         return installed
 
     def uninstall(self, name: str, agent: str = "global") -> bool:
@@ -125,6 +137,8 @@ class SkillRegistry:
 
         shutil.rmtree(target)
         self._remove_from_index(name, agent)
+        if self.agent_links and agent == "global":
+            agent_links.unlink_skill(name, self.installed_dir)
         return True
 
     def get(self, name: str, agent: str = "global") -> Optional[InstalledSkill]:
