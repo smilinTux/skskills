@@ -77,7 +77,19 @@ skskills disable unhinged-mode            # keep installed but stop exposing its
 skskills link skseed lumina               # symlink a global skill into an agent namespace
 skskills package ./my-skill               # build a distributable tarball (+ SHA-256, metadata sidecar)
 skskills publish ./my-skill --token …     # publish to the remote registry (CapAuth bearer)
+skskills agents sync                      # link installed SKILL.md skills into every agent framework
+skskills agents status                    # which frameworks can load each installed skill
 ```
+
+Every global install that ships a `SKILL.md` is also symlinked, whole
+directory, into each agent framework found on the machine, so it loads with no
+extra step: `~/.claude/skills`, `$CODEX_HOME/skills` (`~/.codex`),
+`~/.pi/agent/skills`, `~/.hermes/skills/skskills`, and `~/.config/opencode/skills`
+(OpenCode only when Claude Code is absent, because OpenCode already reads
+`~/.claude/skills`). Uninstall removes the links. skskills only touches symlinks
+that point into its own registry; a hand-made skill directory with the same name
+is left alone and reported as a conflict. `SKSKILLS_AGENT_LINKS=0` turns this off
+(`agent_links.py`).
 
 ## What skskills provides
 
@@ -90,6 +102,7 @@ skskills publish ./my-skill --token …     # publish to the remote registry (Ca
 | **Catalog** | the curated first-party skill list (`catalog.yaml`) with pip/npm/git coordinates and `catalog install/info/search` (`catalog.py`) |
 | **Remote** | publish/download/pull over an HTTP registry, install `from_git`, package to a checksummed tarball (`remote.py`) |
 | **Pip bridge** | find a `skill.yaml` bundled inside an installed pip package and register it — skills ship as ordinary Python packages (`pip_bridge.py`) |
+| **Agent links** | symlink each installed `SKILL.md` skill into Claude Code, Codex, pi, Hermes, and OpenCode skill dirs; `agents sync/status` (`agent_links.py`) |
 | **CLI** | `skskills` (Click + Rich) — the whole lifecycle from the terminal (`cli.py`) |
 
 **Delivery channels (all converge on the same registry install):** local path ·

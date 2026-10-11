@@ -505,6 +505,63 @@ def pip_install(package: str, agent: str, force: bool, no_pip: bool) -> None:
 
 
 @main.group()
+def agents() -> None:
+    """Make installed skills loadable by every agent framework.
+
+    Global installs that ship a SKILL.md are symlinked into Claude Code,
+    Codex, pi, Hermes, and OpenCode skill directories automatically. These
+    commands backfill older installs and show where each skill is visible.
+    SKSKILLS_AGENT_LINKS=0 turns linking off.
+
+    Examples:
+
+      skskills agents sync
+      skskills agents status
+    """
+
+
+@agents.command("sync")
+def agents_sync() -> None:
+    """Link every installed skill into each detected framework; prune stale links."""
+    from . import agent_links
+
+    if not agent_links.enabled():
+        console.print("[yellow]Agent linking is off (SKSKILLS_AGENT_LINKS=0).[/yellow]")
+        return
+    result = agent_links.sync(SkillRegistry())
+    if not result["targets"]:
+        console.print("[yellow]No agent frameworks detected.[/yellow]")
+        return
+    for framework, path in result["targets"].items():
+        console.print(f"  [cyan]{framework:<12}[/cyan] {path}")
+    console.print(f"\n  Linked: {result['linked']}  Pruned: {result['pruned']}")
+    if result["conflicts"]:
+        console.print(
+            f"  [yellow]Left alone (not managed by skskills):[/yellow] {', '.join(result['conflicts'])}"
+        )
+
+
+@agents.command("status")
+def agents_status() -> None:
+    """Show which frameworks can load each installed skill."""
+    from . import agent_links
+
+    targets = agent_links.detect_targets()
+    report = agent_links.status(SkillRegistry(), targets)
+    if not report:
+        console.print("[dim]No installed skills with a SKILL.md.[/dim]")
+        return
+    table = Table(title="Skill visibility by agent framework")
+    table.add_column("Skill", style="cyan")
+    for framework in targets:
+        table.add_column(framework)
+    style = {"ok": "[green]ok[/green]", "missing": "[red]missing[/red]", "conflict": "[yellow]conflict[/yellow]"}
+    for name, row in report.items():
+        table.add_row(name, *(style[row[f]] for f in targets))
+    console.print(table)
+
+
+@main.group()
 def catalog() -> None:
     """Browse and install skills from the curated catalog.
 
