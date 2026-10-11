@@ -89,6 +89,16 @@ Versioning intent: [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   replaced by four that pin the fixed state and fail if either regression returns.
 
 ### Added
+- **Installed skills now load in every agent framework.** A global install that
+  ships a `SKILL.md` is symlinked, whole directory, into each framework found on
+  the machine: `~/.claude/skills`, `$CODEX_HOME/skills`, `~/.pi/agent/skills`,
+  `~/.hermes/skills/skskills`, and `~/.config/opencode/skills` (OpenCode only
+  without Claude Code, since it reads `~/.claude/skills`). Uninstall removes the
+  links. Only symlinks pointing into the registry are ever touched.
+  `skskills agents sync` backfills older installs and prunes stale links;
+  `skskills agents status` shows per-framework visibility.
+  `SKSKILLS_AGENT_LINKS=0` turns it off. On by default only for the default
+  registry; `SkillRegistry(root=...)` stays off unless `agent_links=True`.
 - `SOP.md`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and this
   `CHANGELOG.md`, bringing the repo to SK_REPO_DOC_STANDARD.
 - `.github/workflows/docs-check.yml`, running the shared sk-standards docs gate.
