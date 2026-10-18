@@ -459,99 +459,99 @@ skills:
     category: productivity
 
   - name: brainstorming
-    local: ~/clawd/skills/brainstorming
     git: https://github.com/obra/superpowers
+    git_path: skills/brainstorming
     description: "Turn ideas into fully formed designs and specs through collaborative dialogue before any creative/implementation work. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, process, design, planning]
     category: productivity
 
   - name: dispatching-parallel-agents
-    local: ~/clawd/skills/dispatching-parallel-agents
     git: https://github.com/obra/superpowers
+    git_path: skills/dispatching-parallel-agents
     description: "Delegate 2+ independent tasks to isolated-context subagents instead of investigating sequentially. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, agents, parallelism, coordination]
     category: productivity
 
   - name: executing-plans
-    local: ~/clawd/skills/executing-plans
     git: https://github.com/obra/superpowers
+    git_path: skills/executing-plans
     description: "Load a written implementation plan, review critically, execute all tasks, report when complete, with review checkpoints. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, process, planning, execution]
     category: productivity
 
   - name: finishing-a-development-branch
-    local: ~/clawd/skills/finishing-a-development-branch
     git: https://github.com/obra/superpowers
+    git_path: skills/finishing-a-development-branch
     description: "Verify tests, detect environment, present integration options, execute the choice, clean up, once implementation is complete. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, git, process, workflow]
     category: productivity
 
   - name: receiving-code-review
-    local: ~/clawd/skills/receiving-code-review
     git: https://github.com/obra/superpowers
+    git_path: skills/receiving-code-review
     description: "Evaluate code review feedback technically instead of performatively agreeing: verify before implementing, ask before assuming. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, code-review, process]
     category: productivity
 
   - name: requesting-code-review
-    local: ~/clawd/skills/requesting-code-review
     git: https://github.com/obra/superpowers
+    git_path: skills/requesting-code-review
     description: "Dispatch a code reviewer subagent with precisely crafted context to catch issues before they cascade. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, code-review, agents, process]
     category: productivity
 
   - name: subagent-driven-development
-    local: ~/clawd/skills/subagent-driven-development
     git: https://github.com/obra/superpowers
+    git_path: skills/subagent-driven-development
     description: "Execute a plan via a fresh implementer subagent per task, task review after each, and a broad final review. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, agents, process, implementation]
     category: productivity
 
   - name: systematic-debugging
-    local: ~/clawd/skills/systematic-debugging
     git: https://github.com/obra/superpowers
+    git_path: skills/systematic-debugging
     description: "Always find root cause before attempting fixes on any bug, test failure, or unexpected behavior. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, debugging, process]
     category: productivity
 
   - name: test-driven-development
-    local: ~/clawd/skills/test-driven-development
     git: https://github.com/obra/superpowers
+    git_path: skills/test-driven-development
     description: "Write the test first, watch it fail, write minimal code to pass, before writing any implementation code. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, testing, process, tdd]
     category: productivity
 
   - name: using-git-worktrees
-    local: ~/clawd/skills/using-git-worktrees
     git: https://github.com/obra/superpowers
+    git_path: skills/using-git-worktrees
     description: "Ensure isolated feature-work workspace via native tools, falling back to git worktrees only when needed. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, git, worktrees, process]
     category: productivity
 
   - name: using-superpowers
-    local: ~/clawd/skills/using-superpowers
     git: https://github.com/obra/superpowers
+    git_path: skills/using-superpowers
     description: "Establishes how to find and use skills, requiring skill invocation before any response including clarifying questions. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, skills, meta, process]
     category: productivity
 
   - name: verification-before-completion
-    local: ~/clawd/skills/verification-before-completion
     git: https://github.com/obra/superpowers
+    git_path: skills/verification-before-completion
     description: "Run verification commands and confirm output before claiming work is complete, fixed, or passing. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, process, verification]
     category: productivity
 
   - name: writing-plans
-    local: ~/clawd/skills/writing-plans
     git: https://github.com/obra/superpowers
+    git_path: skills/writing-plans
     description: "Write comprehensive implementation plans for a spec, assuming the engineer has zero codebase context, before touching code. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, process, planning]
     category: productivity
 
   - name: writing-skills
-    local: ~/clawd/skills/writing-skills
     git: https://github.com/obra/superpowers
+    git_path: skills/writing-skills
     description: "Create or edit skills using TDD applied to process documentation, and verify they work before deployment. Vendored from obra/superpowers v6.3.0."
     tags: [productivity, skills, meta, process]
     category: productivity
