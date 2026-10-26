@@ -89,6 +89,20 @@ Versioning intent: [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   replaced by four that pin the fixed state and fail if either regression returns.
 
 ### Added
+- **Vendored third-party skill packs under `skills/`, installable from the catalog**
+  (`git` + `git_path`, same as `chat`/`who`): heygen-com/hyperframes v0.8.149
+  (21 video skills, Apache-2.0), Panniantong/Agent-Reach v1.5.0 (`agent-reach`,
+  MIT), and the 27 published mattpocock/skills v1.3.1 skills (MIT; the
+  `in-progress/` and frozen `misc/` buckets are left out). Each vendored dir
+  carries the upstream `LICENSE` and a generated `skill.yaml` whose `upstream:`
+  block pins the source commit.
+- `scripts/vendor_skills.py`: vendors (or refreshes) a directory of upstream
+  `SKILL.md` skills into `skills/<name>/` with a generated `skill.yaml`.
+- `tools/add_reference_toc.py` skips skills whose `skill.yaml` declares
+  `upstream:`, so vendored docs stay byte-identical to upstream.
+- `.gitleaks.toml` and `.gitguardian.yaml`: default rules plus one path-pinned
+  allowlist for HeyGen's public PostHog ingestion key in the vendored
+  `media-use` skill.
 - `SOP.md`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and this
   `CHANGELOG.md`, bringing the repo to SK_REPO_DOC_STANDARD.
 - `.github/workflows/docs-check.yml`, running the shared sk-standards docs gate.

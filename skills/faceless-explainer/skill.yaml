@@ -1,0 +1,25 @@
+# Vendored from heygen-com/hyperframes@e1925d4317fc by scripts/vendor_skills.py. Do not edit; re-run to refresh.
+name: faceless-explainer
+version: 0.8.149
+description: 'Turn arbitrary text — an article, notes, a topic, a brief — into a faceless explainer video:
+  there is no site or footage to capture, so the visuals are invented per scene (typography, abstract
+  graphics, diagrams, data-viz). Use for topic explainers, concept breakdowns, how-tos, listicles. Not
+  a video built from a website (/product-launch-video — promo or tour). Unclear → /hyperframes.'
+category: media
+tags:
+- video
+- hyperframes
+- motion-graphics
+author:
+  name: heygen-com
+license: Apache-2.0
+upstream:
+  repo: https://github.com/heygen-com/hyperframes
+  path: skills/faceless-explainer
+  commit: e1925d4317fcd13c0e5799cd4767a3e2dd4c9238
+invocation:
+  type: claude-code-skill
+  trigger: /faceless-explainer
+  entrypoint: SKILL.md
+requires:
+  runtime: Node.js 22+ and FFmpeg; skills call the HyperFrames CLI via npx hyperframes

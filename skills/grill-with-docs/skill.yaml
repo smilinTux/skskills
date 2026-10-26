@@ -1,0 +1,21 @@
+# Vendored from mattpocock/skills@49dd158d1076 by scripts/vendor_skills.py. Do not edit; re-run to refresh.
+name: grill-with-docs
+version: 1.3.1
+description: A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary)
+  as we go.
+category: productivity
+tags:
+- engineering
+- engineering
+- mattpocock
+author:
+  name: mattpocock
+license: MIT
+upstream:
+  repo: https://github.com/mattpocock/skills
+  path: skills/engineering/grill-with-docs
+  commit: 49dd158d1076134a641b33efb035946536778336
+invocation:
+  type: claude-code-skill
+  trigger: /grill-with-docs
+  entrypoint: SKILL.md
