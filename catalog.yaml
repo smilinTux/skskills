@@ -722,7 +722,7 @@ skills:
   - name: agent-reach
     git: https://github.com/smilinTux/skskills
     git_path: skills/agent-reach
-    description: "Internet research router across 16 platforms (web, search, Twitter/X, Reddit, YouTube, Bilibili, Xiaohongshu, LinkedIn, GitHub, RSS, and more) with multi-backend routing; read-only. Needs the agent-reach CLI (pip install git+https://github.com/Panniantong/Agent-Reach). Vendored from Panniantong/Agent-Reach v1.5.0, invoke with /agent-reach."
+    description: "Internet research router across 16 platforms (web, search, Twitter/X, Reddit, YouTube, Bilibili, Xiaohongshu, LinkedIn, GitHub, RSS, and more) with multi-backend routing; read-only. Needs the agent-reach CLI (uv tool install git+https://github.com/Panniantong/Agent-Reach@v1.6.0; the PyPI package of that name is NOT this project). Vendored from Panniantong/Agent-Reach v1.6.0, invoke with /agent-reach."
     tags: [research, web, social, search]
     category: search
 
