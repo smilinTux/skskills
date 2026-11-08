@@ -96,7 +96,7 @@ flowchart TD
         GIT["git repo"]
         PIP["pip package<br/>(bundled skill.yaml)"]
         CAT["catalog.yaml"]
-        REM["remote registry<br/>skills.smilintux.org/api"]
+        REM["remote registry<br/>skskills.skworld.io/api"]
     end
 
     CLI["skskills CLI<br/>src/skskills/cli.py:37 (click group 'main')"]
@@ -300,7 +300,7 @@ Two things in this repo look like endpoints and are not:
 | Looks like | What it actually is |
 |---|---|
 | `src/skskills/plugin/mcp-registry.yaml` lists `http://127.0.0.1:9384/...` (skcomms) and `http://<host>.ts.net:9386/sse` (sk-access) | Connection specs for **other** services, copied into emitted `.mcp.json` files. skskills never binds them. |
-| `remote.py:36` `DEFAULT_REGISTRY_URL = "https://skills.smilintux.org/api"` | An **outbound** target for `pull` / `publish` / `remote-search`. skskills is the client, never the server. |
+| `remote.py:56` `DEFAULT_REGISTRY_URL = "https://skskills.skworld.io/api"` | An **outbound** target for `pull` / `publish` / `remote-search`. skskills is the client, never the server. |
 
 ---
 
@@ -504,7 +504,7 @@ available on 2026-08-14:
    and no MCP client config in this repo names `skskills-aggregator`. The launch path
    used in practice (a Claude Code `.mcp.json`, a `skcapstone` spawn, or a manual
    `skskills run`) is undocumented here.
-2. **Whether `skills.smilintux.org/api` is live**, what it authenticates, and whether
+2. **Whether `skskills.skworld.io/api` is live**, what it authenticates, and whether
    any skill has ever been published or pulled through it. The client exists; the
    server side is out of scope for this repo and unverified.
 3. **The security contact PGP fingerprint.** SECURITY.md names GitHub private
@@ -527,7 +527,7 @@ checks:
   - name: aggregator is stdio only, no HTTP listener anywhere in src
     run: grep -qF 'from mcp.server.stdio import stdio_server' src/skskills/aggregator.py && ! grep -rqE 'uvicorn|FastAPI|aiohttp|\.bind\(|hypercorn' src/skskills/
   - name: remote registry URL is the documented outbound target
-    run: grep -qF 'DEFAULT_REGISTRY_URL = "https://skills.smilintux.org/api"' src/skskills/remote.py
+    run: grep -qF 'DEFAULT_REGISTRY_URL = "https://skskills.skworld.io/api"' src/skskills/remote.py
   - name: skill-roots still declares 10 roots with canonical and incubator roles
     run: test "$(grep -cE '^  - \{ path:' src/skskills/plugin/skill-roots.yaml)" = 10 && grep -qE 'role: canonical' src/skskills/plugin/skill-roots.yaml && grep -qE 'role: incubator' src/skskills/plugin/skill-roots.yaml
   - name: publish scrub gate still requires an explicit flag and scans for secrets
