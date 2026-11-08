@@ -630,7 +630,7 @@ def catalog_install(name: str, agent: str, force: bool) -> None:
     install method (pip-install for pip packages, clone for git-only skills).
     """
     from .catalog import SkillCatalog
-    from .pip_bridge import install_from_pip
+    from .installer import install_from_catalog
 
     cat = SkillCatalog()
     entry = cat.get(name)
@@ -639,50 +639,12 @@ def catalog_install(name: str, agent: str, force: bool) -> None:
         console.print("  Try [cyan]skskills catalog search <term>[/cyan]")
         sys.exit(1)
 
-    registry = SkillRegistry()
-
-    if entry.is_pip_installable:
-        console.print(f"\n  [cyan]catalog install:[/cyan] {name} (via pip: {entry.pip})")
-        try:
-            installed = install_from_pip(entry.pip, registry, agent=agent, force=force)
-            console.print(f"  [green]Installed:[/green] {installed.manifest.name} v{installed.manifest.version}")
-            console.print(f"  Agent:  {installed.agent}")
-            if installed.manifest.tools:
-                console.print(f"  Tools:  {', '.join(installed.manifest.tool_names)}")
-        except (RuntimeError, FileNotFoundError, ValueError) as exc:
-            console.print(f"  [red]Install failed:[/red] {exc}")
-            sys.exit(1)
-
-    elif entry.git:
-        # Fall back to git clone
-        console.print(f"\n  [cyan]catalog install:[/cyan] {name} (via git: {entry.git})")
-        from .remote import RemoteRegistry
-
-        try:
-            git_url = entry.git
-            if entry.git_path:
-                # Subdirectory skill — clone and install from subdir
-                import subprocess
-                import tempfile
-                with tempfile.TemporaryDirectory() as tmp:
-                    subprocess.run(
-                        ["git", "clone", "--depth=1", git_url, tmp],
-                        check=True,
-                        capture_output=True,
-                    )
-                    skill_dir = Path(tmp) / entry.git_path
-                    installed = registry.install(skill_dir, agent=agent, force=force)
-            else:
-                skill_dir = RemoteRegistry.from_git(git_url)
-                installed = registry.install(skill_dir, agent=agent, force=force)
-
-            console.print(f"  [green]Installed:[/green] {installed.manifest.name}")
-        except Exception as exc:
-            console.print(f"  [red]Install failed:[/red] {exc}")
-            sys.exit(1)
-
-    else:
-        console.print(f"[yellow]No install method available for '{name}'.[/yellow]")
+    try:
+        installed = install_from_catalog(name, agent=agent, force=force)
+        console.print(f"  [green]Installed:[/green] {installed.manifest.name} v{installed.manifest.version}")
+        console.print(f"  Agent:  {installed.agent}")
+    except Exception as exc:
+        console.print(f"  [red]Install failed:[/red] {exc}")
         sys.exit(1)
 
 
