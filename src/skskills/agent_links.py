@@ -81,7 +81,7 @@ def _prepare(framework: str, target_dir: Path) -> None:
     target_dir.mkdir(parents=True, exist_ok=True)
     if framework == "hermes":
         desc = target_dir / "DESCRIPTION.md"
-        if not desc.exists():
+        if not desc.exists() and not desc.is_symlink():
             desc.write_text(HERMES_DESCRIPTION, encoding="utf-8")
 
 

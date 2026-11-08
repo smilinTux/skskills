@@ -85,6 +85,17 @@ def test_hermes_category_gets_description(home, tmp_path):
     assert (home / ".hermes" / "skills" / "skskills" / "DESCRIPTION.md").is_file()
 
 
+def test_hermes_description_never_written_through_dangling_symlink(home, tmp_path):
+    outside = tmp_path / "outside" / "DESCRIPTION.md"
+    outside.parent.mkdir()
+    desc = home / ".hermes" / "skills" / "skskills" / "DESCRIPTION.md"
+    desc.parent.mkdir(parents=True)
+    desc.symlink_to(outside)
+    registry_for(home).install(make_skill(tmp_path, "demo"))
+    assert desc.is_symlink()
+    assert not outside.exists()
+
+
 def test_skill_without_skill_md_is_not_linked(home, tmp_path):
     registry_for(home).install(make_skill(tmp_path, "toolsonly", skill_md=False))
     assert not (home / ".claude" / "skills" / "toolsonly").exists()
