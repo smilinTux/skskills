@@ -4,7 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "skskills"
-version = "0.2.0"
+# The version lives in src/skskills/__init__.py only (see tool.setuptools.dynamic).
+dynamic = ["version"]
 description = "Sovereign Agent Skills — MCP-native skill framework replacing OpenClaw"
 readme = "README.md"
 license = {text = "GPL-3.0-or-later"}
@@ -59,6 +60,9 @@ skskills-aggregator = "skskills.aggregator:main"
 Homepage = "https://skills.smilintux.org"
 Repository = "https://github.com/smilinTux/skskills"
 Issues = "https://github.com/smilinTux/skskills/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "skskills.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]

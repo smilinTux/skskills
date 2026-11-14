@@ -59,6 +59,14 @@ Versioning intent: [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Fixed
+- **One version, in one place.** The version was spelled out in four places that
+  disagreed: pyproject and `__init__.py` said 0.2.0, `package.json` and the root
+  `skill.yaml` said 0.1.0, PyPI had 0.1.1, and the git tags reached v1.1.1 on code
+  that called itself 0.1.x. `skskills.__version__` is now the only source:
+  pyproject reads it (`dynamic = ["version"]`), a test holds `package.json` and
+  `skill.yaml` to it, and the publish workflow refuses a tag that is not
+  `v<__version__>`. The version moves to 1.2.0 so it sorts above every existing
+  tag and registry release.
 - **The discovery walk no longer aborts on one unreadable `SKILL.md`.**
   `plugin/discovery.py` called `read_text()` unguarded on every `SKILL.md` it
   walked, so a single dangling symlink raised `FileNotFoundError` and killed

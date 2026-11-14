@@ -1,5 +1,5 @@
 name: skskills
-version: "0.1.0"
+version: "1.2.0"
 description: >
   Sovereign Agent Skills framework — MCP-native skill management replacing
   OpenClaw. Install, discover, and manage skills from pip packages, git
