@@ -24,6 +24,10 @@ jobs:
       # fail. Never suffix it with a success-swallowing shell guard, and
       # never let the publish jobs run unconditionally. See card 62a5256d.
       - run: python -m pytest tests/ -v --tb=short
+      - name: Tag must equal the package version
+        run: |
+          want="v$(python -c 'import skskills; print(skskills.__version__)')"
+          test "$GITHUB_REF_NAME" = "$want" || { echo "tag $GITHUB_REF_NAME != $want"; exit 1; }
 
   publish-pypi:
     needs: test
