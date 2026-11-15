@@ -33,11 +33,13 @@ classifiers = [
 ]
 
 dependencies = [
-    "click>=8.1,<9.0",
+    "click>=8.1",
+    # Cap kept (tested 2026-11-15): mcp 2.x drops Server.list_tools, which the
+    # aggregator registers handlers with; the test suite fails on mcp 2.3.0.
     "mcp>=1.0,<2.0",
-    "pydantic>=2.0,<3.0",
-    "pyyaml>=6.0,<7.0",
-    "rich>=13.0,<14.0",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "rich>=13.0",
 ]
 
 [project.optional-dependencies]
