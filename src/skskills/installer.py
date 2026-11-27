@@ -20,6 +20,10 @@ the registry overwrites the snapshot under ``~/.skskills/installed/<name>``.
 from __future__ import annotations
 
 import logging
+import re
+import shutil
+import subprocess
+import tempfile
 from pathlib import Path
 from typing import Optional
 
@@ -36,6 +40,35 @@ _REPO_ROOT = Path(__file__).resolve().parents[2]
 
 # Fallback source tree for first-party Claude Code skills resolved by bare name.
 _LOCAL_SKILLS_DIR = Path("~/clawd/skills").expanduser()
+
+
+def _install_git_entry(entry, name: str, agent: str, force: bool) -> InstalledSkill:
+    """Clone a catalog Git source and adapt SKILL.md-only trees to SKSkills."""
+    if not entry.git:
+        raise ValueError(f"catalog entry '{name}' has no Git source")
+    with tempfile.TemporaryDirectory(prefix="skskills-") as tmp:
+        checkout = Path(tmp) / "checkout"
+        subprocess.run(["git", "clone", "--depth=1", entry.git, str(checkout)], check=True,
+                       capture_output=True, text=True)
+        source = checkout / entry.git_path if entry.git_path else checkout
+        if not source.is_dir():
+            raise FileNotFoundError(f"Git skill path not found: {entry.git_path}")
+        if not (source / "skill.yaml").exists():
+            skill_md = source / "SKILL.md"
+            if not skill_md.exists():
+                raise FileNotFoundError(f"Git skill '{name}' has neither skill.yaml nor SKILL.md")
+            staged = Path(tmp) / "staged"
+            shutil.copytree(source, staged)
+            text = skill_md.read_text(encoding="utf-8")
+            match = re.search(r"^name:\s*(.+)$", text, re.MULTILINE)
+            desc = re.search(r"^description:\s*(.+)$", text, re.MULTILINE)
+            (staged / "skill.yaml").write_text(
+                "name: %s\nversion: 0.0.0+git\ndescription: %s\nauthor:\n  name: catalog-source\nknowledge:\n  - path: SKILL.md\n    description: Skill instructions\n    auto_load: true\n" % (
+                    (match.group(1).strip() if match else name),
+                    (desc.group(1).strip() if desc else "Git-backed catalog skill"),
+                ), encoding="utf-8")
+            source = staged
+        return install_from_local(source, agent=agent, force=force)
 
 
 def install_from_local(
@@ -98,7 +131,13 @@ def install_from_catalog(
         return install_from_local(Path(entry.local).expanduser(), agent=agent, force=force)
 
     if entry.git_path:
-        return install_from_local(_REPO_ROOT / entry.git_path, agent=agent, force=force)
+        bundled = _REPO_ROOT / entry.git_path
+        if bundled.exists():
+            return install_from_local(bundled, agent=agent, force=force)
+        return _install_git_entry(entry, name, agent, force)
+
+    if entry.git:
+        return _install_git_entry(entry, name, agent, force)
 
     if entry.pip:
         registry = SkillRegistry()

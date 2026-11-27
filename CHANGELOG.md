@@ -59,6 +59,13 @@ Versioning intent: [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Fixed
+
+- Catalog entries backed by a Git repo now install without a local checkout. The
+  obra/superpowers entries declare `git_path` instead of a machine-local `local`
+  path, `install_from_catalog` clones the repo when the path is not bundled, and
+  a SKILL.md-only tree is adapted into a validated manifest. `skskills catalog
+  install` now delegates to `install_from_catalog` so the CLI and the library
+  share one install path.
 - Dependencies (1.2.1): dropped the `rich<14`, `click<9`, `pydantic<3` and `pyyaml<7` upper caps. `rich<14` pulled a shared venv down to rich 13.9.4 and broke `twine` 7 (needs rich >= 14.3.3). Tested on rich 13.9.4 and 15.0.0, click 8.1.8 and 8.5.1. `mcp<2` stays: on mcp 2.x `mcp.server.Server` has no `list_tools` and the aggregator fails (comment next to the requirement).
 - **One version, in one place.** The version was spelled out in four places that
   disagreed: pyproject and `__init__.py` said 0.2.0, `package.json` and the root
