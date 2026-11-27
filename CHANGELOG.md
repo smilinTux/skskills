@@ -1,5 +1,35 @@
 # Changelog
 
+## Contents
+
+- [[Unreleased]](#unreleased)
+  - [Fixed](#fixed)
+  - [Changed](#changed)
+  - [Added](#added)
+  - [Documented (no code change)](#documented-no-code-change)
+  - [Not changed](#not-changed)
+- [[0.2.0] - 2026-07-03](#020---2026-07-03)
+  - [Added](#added-1)
+  - [Fixed](#fixed-1)
+- [[Untagged] - 2026-07-24](#untagged---2026-07-24)
+  - [Added](#added-2)
+- [[Untagged] - 2026-06-13](#untagged---2026-06-13)
+  - [Changed](#changed-1)
+- [[v1.1.1] - 2026-06-10](#v111---2026-06-10)
+  - [Added](#added-3)
+  - [Fixed](#fixed-2)
+- [[0.1.1] - 2026-04-12](#011---2026-04-12)
+  - [Added](#added-4)
+  - [Fixed](#fixed-3)
+- [[v1.1.0] - 2026-03-21](#v110---2026-03-21)
+  - [Added](#added-5)
+- [[Untagged] - 2026-03-04](#untagged---2026-03-04)
+  - [Added](#added-6)
+- [[Untagged] - 2026-02-27](#untagged---2026-02-27)
+  - [Added](#added-7)
+- [[Untagged] - 2026-02-26](#untagged---2026-02-26)
+  - [Added](#added-8)
+
 All notable changes to skskills are documented here.
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
@@ -29,6 +59,15 @@ Versioning intent: [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Fixed
+- Dependencies (1.2.1): dropped the `rich<14`, `click<9`, `pydantic<3` and `pyyaml<7` upper caps. `rich<14` pulled a shared venv down to rich 13.9.4 and broke `twine` 7 (needs rich >= 14.3.3). Tested on rich 13.9.4 and 15.0.0, click 8.1.8 and 8.5.1. `mcp<2` stays: on mcp 2.x `mcp.server.Server` has no `list_tools` and the aggregator fails (comment next to the requirement).
+- **One version, in one place.** The version was spelled out in four places that
+  disagreed: pyproject and `__init__.py` said 0.2.0, `package.json` and the root
+  `skill.yaml` said 0.1.0, PyPI had 0.1.1, and the git tags reached v1.1.1 on code
+  that called itself 0.1.x. `skskills.__version__` is now the only source:
+  pyproject reads it (`dynamic = ["version"]`), a test holds `package.json` and
+  `skill.yaml` to it, and the publish workflow refuses a tag that is not
+  `v<__version__>`. The version moves to 1.2.0 so it sorts above every existing
+  tag and registry release.
 - **The discovery walk no longer aborts on one unreadable `SKILL.md`.**
   `plugin/discovery.py` called `read_text()` unguarded on every `SKILL.md` it
   walked, so a single dangling symlink raised `FileNotFoundError` and killed
@@ -59,6 +98,30 @@ Versioning intent: [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   replaced by four that pin the fixed state and fail if either regression returns.
 
 ### Added
+- **Vendored third-party skill packs under `skills/`, installable from the catalog**
+  (`git` + `git_path`, same as `chat`/`who`): heygen-com/hyperframes v0.8.149
+  (21 video skills, Apache-2.0), Panniantong/Agent-Reach v1.5.0 (`agent-reach`,
+  MIT), and the 27 published mattpocock/skills v1.3.1 skills (MIT; the
+  `in-progress/` and frozen `misc/` buckets are left out). Each vendored dir
+  carries the upstream `LICENSE` and a generated `skill.yaml` whose `upstream:`
+  block pins the source commit.
+- `scripts/vendor_skills.py`: vendors (or refreshes) a directory of upstream
+  `SKILL.md` skills into `skills/<name>/` with a generated `skill.yaml`.
+- `tools/add_reference_toc.py` skips skills whose `skill.yaml` declares
+  `upstream:`, so vendored docs stay byte-identical to upstream.
+- `.gitleaks.toml` and `.gitguardian.yaml`: default rules plus one path-pinned
+  allowlist for HeyGen's public PostHog ingestion key in the vendored
+  `media-use` skill.
+- **Installed skills now load in every agent framework.** A global install that
+  ships a `SKILL.md` is symlinked, whole directory, into each framework found on
+  the machine: `~/.claude/skills`, `$CODEX_HOME/skills`, `~/.pi/agent/skills`,
+  `~/.hermes/skills/skskills`, and `~/.config/opencode/skills` (OpenCode only
+  without Claude Code, since it reads `~/.claude/skills`). Uninstall removes the
+  links. Only symlinks pointing into the registry are ever touched.
+  `skskills agents sync` backfills older installs and prunes stale links;
+  `skskills agents status` shows per-framework visibility.
+  `SKSKILLS_AGENT_LINKS=0` turns it off. On by default only for the default
+  registry; `SkillRegistry(root=...)` stays off unless `agent_links=True`.
 - `SOP.md`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and this
   `CHANGELOG.md`, bringing the repo to SK_REPO_DOC_STANDARD.
 - `.github/workflows/docs-check.yml`, running the shared sk-standards docs gate.

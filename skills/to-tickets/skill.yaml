@@ -1,0 +1,22 @@
+# Vendored from mattpocock/skills@49dd158d1076 by scripts/vendor_skills.py. Do not edit; re-run to refresh.
+name: to-tickets
+version: 1.3.1
+description: Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each
+  declaring its blocking edges, published to the configured tracker (edges as text in one file per ticket
+  locally, or native blocking links on a real tracker).
+category: productivity
+tags:
+- engineering
+- engineering
+- mattpocock
+author:
+  name: mattpocock
+license: MIT
+upstream:
+  repo: https://github.com/mattpocock/skills
+  path: skills/engineering/to-tickets
+  commit: 49dd158d1076134a641b33efb035946536778336
+invocation:
+  type: claude-code-skill
+  trigger: /to-tickets
+  entrypoint: SKILL.md

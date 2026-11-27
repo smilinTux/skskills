@@ -1,0 +1,30 @@
+# Vendored from heygen-com/hyperframes@e1925d4317fc by scripts/vendor_skills.py. Do not edit; re-run to refresh.
+name: hyperframes-registry
+version: 0.8.149
+description: Search, install, and wire registry blocks and components into HyperFrames compositions. Use
+  BEFORE hand-building any named visual — whenever a brief, a user, or a storyboard names a look, effect,
+  treatment, or transition such as CRT scanlines, glitch, chromatic aberration, film grain, a shimmer
+  sweep, a chart, a code or terminal window, a map, or a confetti burst — because roughly 400 hosted items
+  already cover many of them and the search ranks all of them with nothing installed, no project, and
+  no account. Also use when running hyperframes add or hyperframes catalog, installing one item or every
+  block matching a tag, wiring an installed item into index.html, or working with hyperframes.json. Covers
+  discovery, install locations, block sub-composition wiring, component snippet merging, and authoring
+  a new block or component to contribute upstream (idea → scaffold → validate → PR).
+category: media
+tags:
+- video
+- hyperframes
+- motion-graphics
+author:
+  name: heygen-com
+license: Apache-2.0
+upstream:
+  repo: https://github.com/heygen-com/hyperframes
+  path: skills/hyperframes-registry
+  commit: e1925d4317fcd13c0e5799cd4767a3e2dd4c9238
+invocation:
+  type: claude-code-skill
+  trigger: /hyperframes-registry
+  entrypoint: SKILL.md
+requires:
+  runtime: Node.js 22+ and FFmpeg; skills call the HyperFrames CLI via npx hyperframes

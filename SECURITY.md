@@ -1,5 +1,19 @@
 # Security Policy - skskills
 
+## Contents
+
+- [Reporting a vulnerability](#reporting-a-vulnerability)
+  - [Safe harbour](#safe-harbour)
+- [Scope](#scope)
+- [Supported versions](#supported-versions)
+- [The signature gap (read this first)](#the-signature-gap-read-this-first)
+  - [What integrity checking does exist](#what-integrity-checking-does-exist)
+- [Threat model (summary)](#threat-model-summary)
+  - [Release integrity is not gated](#release-integrity-is-not-gated)
+- [Secret handling](#secret-handling)
+- [Dependency posture](#dependency-posture)
+- [What this repo does NOT claim](#what-this-repo-does-not-claim)
+
 `skskills` installs and executes third-party code. That is its entire job: a skill is
 a manifest plus payload, and running a skill means importing a Python dotpath or
 spawning an executable that came from a path, a git repo, a pip package, or a remote

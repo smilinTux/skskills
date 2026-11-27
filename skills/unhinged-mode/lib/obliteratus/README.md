@@ -15,6 +15,38 @@ tags:
 short_description: "One-click model liberation + chat playground"
 ---
 
+## Contents
+
+- [What it does](#what-it-does)
+- [What makes OBLITERATUS unique](#what-makes-obliteratus-unique)
+- [Novel techniques (2025-2026)](#novel-techniques-2025-2026)
+- [Ways to use OBLITERATUS](#ways-to-use-obliteratus)
+  - [1. HuggingFace Spaces (zero setup)](#1-huggingface-spaces-zero-setup)
+  - [2. Local web UI (your GPU, same interface)](#2-local-web-ui-your-gpu-same-interface)
+  - [3. Google Colab (free GPU)](#3-google-colab-free-gpu)
+  - [4. CLI (headless, scriptable)](#4-cli-headless-scriptable)
+  - [5. Python API (full programmatic control)](#5-python-api-full-programmatic-control)
+  - [6. YAML configs (reproducible studies)](#6-yaml-configs-reproducible-studies)
+- [Two intervention paradigms](#two-intervention-paradigms)
+  - [Weight projection (permanent)](#weight-projection-permanent)
+  - [Steering vectors (reversible, inference-time)](#steering-vectors-reversible-inference-time)
+- [15 analysis modules](#15-analysis-modules)
+- [Analysis-informed pipeline](#analysis-informed-pipeline)
+- [Ablation strategies](#ablation-strategies)
+- [116 curated models across 5 tiers](#116-curated-models-across-5-tiers)
+- [10 study presets](#10-study-presets)
+- [How it compares](#how-it-compares)
+- [Community-powered research — every run advances the science](#community-powered-research-every-run-advances-the-science)
+  - [Telemetry: opt-in, anonymous, research-first](#telemetry-opt-in-anonymous-research-first)
+  - [The community leaderboard](#the-community-leaderboard)
+  - [Local contributions (PR-based)](#local-contributions-pr-based)
+- [Web dashboard](#web-dashboard)
+- [Architecture support](#architecture-support)
+- [References](#references)
+- [Citing](#citing)
+- [Testing](#testing)
+- [License](#license)
+
 <p align="center">
   <strong>O B L I T E R A T U S</strong>
 </p>

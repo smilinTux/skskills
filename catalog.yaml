@@ -568,6 +568,355 @@ skills:
     tags: [react, nextjs, frontend, reference]
     category: reference
 
+  # ── Third-party: heygen-com/hyperframes (vendored under skills/, Apache-2.0) ──
+
+  - name: embedded-captions
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/embedded-captions
+    description: "Add captions or subtitles to an existing single-subject talking-head video without editing the footage. Vendored from heygen-com/hyperframes v0.8.149, invoke with /embedded-captions."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: faceless-explainer
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/faceless-explainer
+    description: "Turn an article, notes, topic, or brief into a faceless explainer video with invented per-scene visuals (typography, diagrams, data-viz). Vendored from heygen-com/hyperframes v0.8.149, invoke with /faceless-explainer."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: figma
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/figma
+    description: "Import Figma designs, brand tokens, and components into a HyperFrames composition as reconstructed motion. Vendored from heygen-com/hyperframes v0.8.149, invoke with /figma."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: general-video
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/general-video
+    description: "Author or edit a custom HyperFrames composition when no specialized workflow fits, or when BRIEF.md sets flow. Vendored from heygen-com/hyperframes v0.8.149, invoke with /general-video."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: hyperframes
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/hyperframes
+    description: "Entry point for making, editing, animating, or rendering any video or motion graphic with HyperFrames (HTML-to-video); routes to the owning workflow skill. Vendored from heygen-com/hyperframes v0.8.149, invoke with /hyperframes."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: hyperframes-animation
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/hyperframes-animation
+    description: "Animation knowledge for HyperFrames: motion rules, scene blueprints, transitions, and runtime adapters (GSAP, Lottie, Three.js, and more). Vendored from heygen-com/hyperframes v0.8.149, invoke with /hyperframes-animation."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: hyperframes-audio
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/hyperframes-audio
+    description: "Mix audio in a HyperFrames composition: fades, crossfades, gain automation, ducking, and voiceover carve. Vendored from heygen-com/hyperframes v0.8.149, invoke with /hyperframes-audio."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: hyperframes-cli
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/hyperframes-cli
+    description: "HyperFrames CLI dev loop: init, add, lint, check, snapshot, preview, render, batch render, and publish. Vendored from heygen-com/hyperframes v0.8.149, invoke with /hyperframes-cli."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: hyperframes-core
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/hyperframes-core
+    description: "The HyperFrames composition contract: structure, data-* timing attributes, clips, tracks, sub-compositions, and deterministic rendering. Vendored from heygen-com/hyperframes v0.8.149, invoke with /hyperframes-core."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: hyperframes-creative
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/hyperframes-creative
+    description: "Non-animation creative direction for HyperFrames videos. Vendored from heygen-com/hyperframes v0.8.149, invoke with /hyperframes-creative."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: hyperframes-keyframes
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/hyperframes-keyframes
+    description: "Seek-safe 2D/3D keyframes for HyperFrames: punch-ins, zooms, reframes, Ken Burns, camera moves, and match/whip handoffs. Vendored from heygen-com/hyperframes v0.8.149, invoke with /hyperframes-keyframes."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: hyperframes-registry
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/hyperframes-registry
+    description: "Search, install, and wire registry blocks and components into HyperFrames compositions. Vendored from heygen-com/hyperframes v0.8.149, invoke with /hyperframes-registry."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: hyperframes-studio
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/hyperframes-studio
+    description: "Collaborate with a person on a HyperFrames project in Studio, separating questions and plans from requested edits. Vendored from heygen-com/hyperframes v0.8.149, invoke with /hyperframes-studio."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: media-use
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/media-use
+    description: "Media resolution for HyperFrames: BGM, SFX, images, icons, logos, voice, and LUTs as frozen local files with a ledger, plus TTS/music/image generation. Vendored from heygen-com/hyperframes v0.8.149, invoke with /media-use."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: motion-graphics
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/motion-graphics
+    description: "Short, design-led motion graphics: kinetic typography, stat count-ups, chart hits, logo stings, lower-thirds, and animated maps. Vendored from heygen-com/hyperframes v0.8.149, invoke with /motion-graphics."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: music-to-video
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/music-to-video
+    description: "Turn a music track (an audio file, a video to pull audio from, or a track generated from a mood brief) into a beat-synced video. Vendored from heygen-com/hyperframes v0.8.149, invoke with /music-to-video."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: product-launch-video
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/product-launch-video
+    description: "Turn a product or marketing URL, pasted script, or brief into a product launch / promo video. Vendored from heygen-com/hyperframes v0.8.149, invoke with /product-launch-video."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: pr-to-video
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/pr-to-video
+    description: "Turn a GitHub pull request (a PR URL, owner/repo#N, or 'this PR' in a checked-out repo) into a code-change explainer video. Vendored from heygen-com/hyperframes v0.8.149, invoke with /pr-to-video."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: remotion-to-hyperframes
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/remotion-to-hyperframes
+    description: "Port an existing Remotion (React) composition's source to HyperFrames HTML. Vendored from heygen-com/hyperframes v0.8.149, invoke with /remotion-to-hyperframes."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: slideshow
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/slideshow
+    description: "Author a HyperFrames slideshow or interactive deck with fragment reveals, branching, hotspots, and presenter mode with speaker notes. Vendored from heygen-com/hyperframes v0.8.149, invoke with /slideshow."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  - name: talking-head-recut
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/talking-head-recut
+    description: "Package an existing talking-head / interview / podcast video with timed, designed GRAPHIC OVERLAY cards. Vendored from heygen-com/hyperframes v0.8.149, invoke with /talking-head-recut."
+    tags: [video, hyperframes, motion-graphics]
+    category: media
+
+  # ── Third-party: Panniantong/Agent-Reach (vendored under skills/, MIT) ──
+
+  - name: agent-reach
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/agent-reach
+    description: "Internet research router across 16 platforms (web, search, Twitter/X, Reddit, YouTube, Bilibili, Xiaohongshu, LinkedIn, GitHub, RSS, and more) with multi-backend routing; read-only. Needs the agent-reach CLI (uv tool install git+https://github.com/Panniantong/Agent-Reach@v1.6.0; the PyPI package of that name is NOT this project). Vendored from Panniantong/Agent-Reach v1.6.0, invoke with /agent-reach."
+    tags: [research, web, social, search]
+    category: search
+
+  # ── Third-party: mattpocock/skills (vendored under skills/, MIT) ──
+
+  - name: ask-matt
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/ask-matt
+    description: "Ask which skill or flow fits your situation. Vendored from mattpocock/skills v1.3.1, invoke with /ask-matt."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: diagnosing-bugs
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/diagnosing-bugs
+    description: "Diagnosis loop for hard bugs and performance regressions. Vendored from mattpocock/skills v1.3.1, invoke with /diagnosing-bugs."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: grill-with-docs
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/grill-with-docs
+    description: "A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go. Vendored from mattpocock/skills v1.3.1, invoke with /grill-with-docs."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: triage
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/triage
+    description: "Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs. Vendored from mattpocock/skills v1.3.1, invoke with /triage."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: improve-codebase-architecture
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/improve-codebase-architecture
+    description: "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick. Vendored from mattpocock/skills v1.3.1, invoke with /improve-codebase-architecture."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: setup-matt-pocock-skills
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/setup-matt-pocock-skills
+    description: "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Vendored from mattpocock/skills v1.3.1, invoke with /setup-matt-pocock-skills."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: tdd
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/tdd
+    description: "Test-driven development. Vendored from mattpocock/skills v1.3.1, invoke with /tdd."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: to-spec
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/to-spec
+    description: "Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed. Vendored from mattpocock/skills v1.3.1, invoke with /to-spec."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: to-tickets
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/to-tickets
+    description: "Break a plan, spec, or conversation into tracer-bullet tickets with blocking edges, published to the configured issue tracker. Vendored from mattpocock/skills v1.3.1, invoke with /to-tickets."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: wayfinder
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/wayfinder
+    description: "Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear. Vendored from mattpocock/skills v1.3.1, invoke with /wayfinder."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: implement
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/implement
+    description: "Implement a piece of work based on a spec or set of tickets. Vendored from mattpocock/skills v1.3.1, invoke with /implement."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: implement-spec
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/implement-spec
+    description: "Implement the result of /to-spec and /to-tickets in code. Vendored from mattpocock/skills v1.3.1, invoke with /implement-spec."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: prototype
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/prototype
+    description: "Build a throwaway prototype to answer a design question. Vendored from mattpocock/skills v1.3.1, invoke with /prototype."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: research
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/research
+    description: "Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Vendored from mattpocock/skills v1.3.1, invoke with /research."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: domain-modeling
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/domain-modeling
+    description: "Build and sharpen a project's domain model. Vendored from mattpocock/skills v1.3.1, invoke with /domain-modeling."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: codebase-design
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/codebase-design
+    description: "Shared vocabulary for designing deep modules. Vendored from mattpocock/skills v1.3.1, invoke with /codebase-design."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: code-review
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/code-review
+    description: "Review changes since a commit, branch, tag, or merge-base on two axes: the repo's documented coding standards and the spec. Vendored from mattpocock/skills v1.3.1, invoke with /code-review."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: pr
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/pr
+    description: "Use when writing a PR body. Vendored from mattpocock/skills v1.3.1, invoke with /pr."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: retro
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/retro
+    description: "Conduct a retrospective on a coding session. Vendored from mattpocock/skills v1.3.1, invoke with /retro."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: wizard
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/wizard
+    description: "Generate an interactive bash wizard that walks a human through steps only they can perform. Vendored from mattpocock/skills v1.3.1, invoke with /wizard."
+    tags: [engineering, engineering, mattpocock]
+    category: productivity
+
+  - name: grill-me
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/grill-me
+    description: "A relentless interview to sharpen a plan or design. Vendored from mattpocock/skills v1.3.1, invoke with /grill-me."
+    tags: [engineering, productivity, mattpocock]
+    category: productivity
+
+  - name: grilling
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/grilling
+    description: "Grill the user relentlessly about a plan, decision, or idea. Vendored from mattpocock/skills v1.3.1, invoke with /grilling."
+    tags: [engineering, productivity, mattpocock]
+    category: productivity
+
+  - name: handoff
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/handoff
+    description: "Compact the current conversation into a handoff document for another agent to pick up. Vendored from mattpocock/skills v1.3.1, invoke with /handoff."
+    tags: [engineering, productivity, mattpocock]
+    category: productivity
+
+  - name: teach
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/teach
+    description: "Teach the user a new skill or concept, within this workspace. Vendored from mattpocock/skills v1.3.1, invoke with /teach."
+    tags: [engineering, productivity, mattpocock]
+    category: productivity
+
+  - name: to-questionnaire
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/to-questionnaire
+    description: "Turn a decision you can't fully answer into a questionnaire for someone else to fill in. Vendored from mattpocock/skills v1.3.1, invoke with /to-questionnaire."
+    tags: [engineering, productivity, mattpocock]
+    category: productivity
+
+  - name: wait-what
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/wait-what
+    description: "Stop. Vendored from mattpocock/skills v1.3.1, invoke with /wait-what."
+    tags: [engineering, productivity, mattpocock]
+    category: productivity
+
+  - name: writing-for-agents
+    git: https://github.com/smilinTux/skskills
+    git_path: skills/writing-for-agents
+    description: "Writing documents for agents. Vendored from mattpocock/skills v1.3.1, invoke with /writing-for-agents."
+    tags: [engineering, productivity, mattpocock]
+    category: productivity
+
 # ── Plugin views (Anthropic envelope grouping) ──────────────────────────────
 plugins:
   - name: skcomms

@@ -1,0 +1,20 @@
+# Vendored from mattpocock/skills@49dd158d1076 by scripts/vendor_skills.py. Do not edit; re-run to refresh.
+name: to-questionnaire
+version: 1.3.1
+description: Turn a decision you can't fully answer into a questionnaire for someone else to fill in.
+category: productivity
+tags:
+- engineering
+- productivity
+- mattpocock
+author:
+  name: mattpocock
+license: MIT
+upstream:
+  repo: https://github.com/mattpocock/skills
+  path: skills/productivity/to-questionnaire
+  commit: 49dd158d1076134a641b33efb035946536778336
+invocation:
+  type: claude-code-skill
+  trigger: /to-questionnaire
+  entrypoint: SKILL.md

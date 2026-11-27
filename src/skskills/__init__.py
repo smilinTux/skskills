@@ -5,6 +5,6 @@ Three primitive types: Knowledge Packs, Tools, and Hooks.
 Each skill runs as its own local MCP server.
 """
 
-__version__ = "0.2.0"
+__version__ = "1.2.1"
 
 SKILLS_HOME = "~/.skskills"

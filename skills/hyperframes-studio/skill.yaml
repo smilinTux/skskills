@@ -1,0 +1,28 @@
+# Vendored from heygen-com/hyperframes@e1925d4317fc by scripts/vendor_skills.py. Do not edit; re-run to refresh.
+name: hyperframes-studio
+version: 0.8.149
+description: 'Use when working with a person on a HyperFrames project in Studio: first, whether their
+  message asks for a change at all (questions, loose ideas and "don''t change anything" get an answer
+  and a plan, not an edit); for a new film, the plan, storyboard and build order that the HyperFrames
+  launch films follow; and how the timeline should be laid out so it reads well (one caption track, one
+  element kind per track, every scene a sub-composition) and where captions and key content may sit (safe
+  zones). Don''t use for how to perform an individual edit (split, trim, retime, volume, copy, swap):
+  that is `creator-editing-recipes.md` in `/hyperframes-core`.'
+category: media
+tags:
+- video
+- hyperframes
+- motion-graphics
+author:
+  name: heygen-com
+license: Apache-2.0
+upstream:
+  repo: https://github.com/heygen-com/hyperframes
+  path: skills/hyperframes-studio
+  commit: e1925d4317fcd13c0e5799cd4767a3e2dd4c9238
+invocation:
+  type: claude-code-skill
+  trigger: /hyperframes-studio
+  entrypoint: SKILL.md
+requires:
+  runtime: Node.js 22+ and FFmpeg; skills call the HyperFrames CLI via npx hyperframes
